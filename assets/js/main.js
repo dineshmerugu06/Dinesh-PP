@@ -588,25 +588,7 @@
 
   /* Desktop: pinned scroll cinema. */
   mm.add('(min-width: 901px)', function () {
-    /* 04 — ghost sequence: first ghost live at pin start (like the original),
-       scroll-velocity blur on the wrapper = the signature transition */
-    var ghosts = qsa('#st-intro .st-g');
-    var ghostWrap = document.querySelector('#st-intro .st-ghost');
-    gsap.set(ghosts[0], { opacity: 1, filter: 'blur(0px)', scale: 1 });
-    gsap.set([ghosts[1], ghosts[2]], { opacity: 0, filter: 'blur(22px)', scale: 0.94 });
-    var itl = gsap.timeline({ scrollTrigger: { trigger: '#st-intro', start: 'top top',
-      end: '+=260%', pin: '#stIntroPin', scrub: 1,
-      onUpdate: function (self) {
-        var v = Math.min(Math.abs(self.getVelocity()) / 2600, 1);
-        ghostWrap.style.filter = v > 0.02 ? 'blur(' + (v * 20).toFixed(1) + 'px)' : '';
-      } } });
-    itl.to(ghosts[0], { opacity: 0, filter: 'blur(22px)', scale: 0.94, duration: 1, ease: 'power2.in' }, 0)
-       .to(ghosts[1], { opacity: 1, filter: 'blur(0px)', scale: 1, duration: 1, ease: 'power2.out' }, 0.6)
-       .to(ghosts[1], { opacity: 0, filter: 'blur(22px)', scale: 0.94, duration: 1, ease: 'power2.in' }, 1.8)
-       .to(ghosts[2], { opacity: 1, filter: 'blur(0px)', scale: 1, duration: 1, ease: 'power2.out' }, 2.4)
-       .to('#stIntroBar', { scaleX: 1, ease: 'none', duration: 3.4 }, 0);
-
-    /* 05 — dialog: first line live at pin start, rest advance on scroll */
+    /* 04 — dialog: first line live at pin start, rest advance on scroll */
     var dlines = qsa('#st-dialog .st-line');
     gsap.set(dlines[0], { opacity: 1, y: 0 });
     var dtl = gsap.timeline({ scrollTrigger: { trigger: '#st-dialog', start: 'top top',
@@ -614,7 +596,7 @@
     dtl.to([dlines[1], dlines[2]], { opacity: 1, y: 0, duration: 0.5, stagger: 0.6 }, 0.2)
        .to('#stDlgBar', { scaleX: 1, ease: 'none', duration: 1.8 }, 0);
 
-    /* 06 — pale ghost replay, with velocity blur */
+    /* 05 — pale ghost replay, with velocity blur */
     var g2 = qsa('#st-panel .st-g');
     var g2Wrap = document.querySelector('#st-panel .st-ghost');
     gsap.set(g2[0], { opacity: 1, filter: 'blur(0px)' });
@@ -650,11 +632,11 @@
 
   /* Mobile: everything visible, no pins. */
   mm.add('(max-width: 900px)', function () {
-    qsa('#st-intro .st-g, #st-panel .st-g').forEach(function (g, i) {
+    qsa('#st-panel .st-g').forEach(function (g, i) {
       gsap.set(g, { opacity: i === 0 ? 1 : 0.28, filter: 'blur(0px)', position: 'static', display: 'block' });
     });
     gsap.set('#st-dialog .st-line', { opacity: 1, y: 0 });
-    gsap.set('#stDlgBar, #stIntroBar', { scaleX: 1 });
+    gsap.set('#stDlgBar', { scaleX: 1 });
     var kws = qsa('.st-kw span');
     kws.forEach(function (k, i) {
       gsap.set(k, { position: 'static', display: 'block', opacity: 1, filter: 'none',
