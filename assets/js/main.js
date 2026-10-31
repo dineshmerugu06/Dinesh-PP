@@ -355,12 +355,37 @@
 })();
 
 
-/* ══════════ sections 5,7–14 · ORIGINAL designs (own code) — 6 PATHS kept ══════════ */
+
+/* ══════════ chapters 01–09 · portfolio-study rebuild ══════════ */
 (function () {
   gsap.registerPlugin(ScrollTrigger);
   const lerp = (a, b, t) => a + (b - a) * t;
 
-  /* ---------- 5 · MANIFESTO: mask-wipe line reveal ---------- */
+  /* ---------- chapter rail scroll-spy ---------- */
+  const chLinks = Array.from(document.querySelectorAll('.chapters a'));
+  const chIds = chLinks.map((a) => a.dataset.ch);
+  if (chLinks.length) {
+    chIds.forEach((id) => {
+      const sec = document.getElementById(id);
+      if (!sec) return;
+      ScrollTrigger.create({
+        trigger: sec, start: 'top center', end: 'bottom center',
+        onToggle: (self) => {
+          if (self.isActive) {
+            chLinks.forEach((a) => a.classList.toggle('on', a.dataset.ch === id));
+          }
+        }
+      });
+    });
+    chLinks.forEach((a) => a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const sec = document.getElementById(a.dataset.ch);
+      if (sec && window.__lenis) window.__lenis.scrollTo(sec, { offset: 0 });
+      else if (sec) sec.scrollIntoView({ behavior: 'smooth' });
+    }));
+  }
+
+  /* ---------- 01 · MANIFESTO: mask-wipe ---------- */
   document.querySelectorAll('.mline > span').forEach((s, i) => {
     gsap.fromTo(s, { yPercent: 115 }, {
       yPercent: 0, duration: 1.1, ease: 'power4.out', delay: i * 0.12,
@@ -368,57 +393,21 @@
     });
   });
 
-  /* ---------- 6 · PATHS: branching selector (kept) ---------- */
-  const pathA = document.getElementById('pathA'), pathB = document.getElementById('pathB');
-  const panelA = document.getElementById('panelA'), panelB = document.getElementById('panelB');
-  function setPath(which) {
-    const onA = which === 'A';
-    if (pathA) pathA.setAttribute('aria-expanded', onA);
-    if (pathB) pathB.setAttribute('aria-expanded', !onA);
-    if (panelA) panelA.hidden = !onA;
-    if (panelB) panelB.hidden = onA;
-    const show = onA ? panelA : panelB;
-    if (show) gsap.fromTo(show, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: .5, ease: 'power2.out' });
-    ScrollTrigger.refresh();
-  }
-  if (pathA) pathA.addEventListener('click', () => setPath(pathA.getAttribute('aria-expanded') === 'true' ? null : 'A'));
-  if (pathB) pathB.addEventListener('click', () => setPath(pathB.getAttribute('aria-expanded') === 'true' ? null : 'B'));
-
-  /* ---------- 7 · SERVICES: accordion ---------- */
-  document.querySelectorAll('.arow').forEach((row) => {
-    const btn = row.querySelector('.ahead');
+  /* ---------- 02 · MISSIONS ---------- */
+  document.querySelectorAll('.ms-card').forEach((card) => {
+    const btn = card.querySelector('.ms-go');
     if (!btn) return;
     btn.addEventListener('click', () => {
-      const open = row.classList.contains('open');
-      document.querySelectorAll('.arow.open').forEach((r) => {
-        r.classList.remove('open');
-        r.querySelector('.ahead').setAttribute('aria-expanded', 'false');
-      });
-      if (!open) { row.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
-      setTimeout(() => ScrollTrigger.refresh(), 600);
+      const msg = card.dataset.wa || 'Hi Dinesh — I have a mission.';
+      window.open('https://wa.me/919398359538?text=' + encodeURIComponent(msg), '_blank', 'noopener');
     });
   });
 
-  /* ---------- 8 · PROCESS: drawing line + step light-up ---------- */
-  const procFill = document.getElementById('procFill');
-  const psteps = document.querySelectorAll('.pstep');
-  const procTrack = document.querySelector('.proc-track');
-  if (procFill && procTrack) {
-    ScrollTrigger.create({
-      trigger: procTrack, start: 'top 75%', end: 'bottom 55%', scrub: 0.6,
-      onUpdate: (self) => {
-        procFill.style.transform = 'scaleX(' + self.progress.toFixed(3) + ')';
-        const lit = Math.round(self.progress * psteps.length);
-        psteps.forEach((s, i) => s.classList.toggle('lit', i < lit));
-      }
-    });
-  }
-
-  /* ---------- 9 · STACK: floating pills that scatter ---------- */
-  const field = document.getElementById('stackField');
+  /* ---------- 03 · ARSENAL: dodging ember tags ---------- */
+  const field = document.getElementById('arsenalField');
   if (field) {
-    const pills = Array.from(field.querySelectorAll('.spill'));
-    const st = pills.map((el) => ({ el, x: 0, y: 0, x0: 0, y0: 0, ox: 0, oy: 0, ph: Math.random() * 6.28, w: 0, h: 0 }));
+    const tags = Array.from(field.querySelectorAll('.tag'));
+    const st = tags.map((el) => ({ el, x: 0, y: 0, x0: 0, y0: 0, ox: 0, oy: 0, ph: Math.random() * 6.28, w: 0, h: 0 }));
     let mx = -9999, my = -9999, running = true;
     const place = () => {
       const r = field.getBoundingClientRect();
@@ -449,7 +438,6 @@
         const dx = fx - mx, dy = fy - my, d = Math.hypot(dx, dy);
         let tx = fx, ty = fy, hot = false;
         if (d < 110 && d > 1) { const f = (110 - d) / 110 * 90; tx = fx + (dx / d) * f; ty = fy + (dy / d) * f; hot = true; }
-        if (!p.x0) { p.x0 = p.ox; p.y0 = p.oy; p.x = p.ox; p.y = p.oy; }
         p.x = lerp(p.x, tx, .12); p.y = lerp(p.y, ty, .12);
         p.el.style.transform = 'translate(' + (p.x - p.x0).toFixed(1) + 'px,' + (p.y - p.y0).toFixed(1) + 'px)';
         p.el.classList.toggle('hot', hot);
@@ -457,17 +445,40 @@
     })(0);
   }
 
-  /* ---------- 10 · SHOWCASE: scroll parallax on rows ---------- */
-  document.querySelectorAll('.srow').forEach((row) => {
-    const cov = row.querySelector('.scover');
-    if (!cov) return;
-    gsap.fromTo(cov, { y: -24 }, {
-      y: 24, ease: 'none',
-      scrollTrigger: { trigger: row, start: 'top bottom', end: 'bottom top', scrub: true }
+  /* ---------- 04 · PROCESS: drawing line ---------- */
+  const procFill = document.getElementById('procFill');
+  const psteps = document.querySelectorAll('.pstep');
+  const procTrack = document.querySelector('.proc-track');
+  if (procFill && procTrack) {
+    ScrollTrigger.create({
+      trigger: procTrack, start: 'top 75%', end: 'bottom 55%', scrub: 0.6,
+      onUpdate: (self) => {
+        procFill.style.transform = 'scaleX(' + self.progress.toFixed(3) + ')';
+        const lit = Math.round(self.progress * psteps.length);
+        psteps.forEach((s, i) => s.classList.toggle('lit', i < lit));
+      }
     });
-  });
+  }
 
-  /* ---------- 11 · PRINCIPLES: cursor tilt on glass cards ---------- */
+  /* ---------- 05 · WORK: pinned horizontal gallery ---------- */
+  const workSec = document.getElementById('work'), workTrack = document.getElementById('workTrack');
+  const workNow = document.getElementById('workNow');
+  if (workSec && workTrack) {
+    const cards = workTrack.querySelectorAll('.wcard');
+    const dist = () => Math.max(0, workTrack.scrollWidth - window.innerWidth + parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--gap')) * 2);
+    gsap.to(workTrack, {
+      x: () => -dist(), ease: 'none',
+      scrollTrigger: {
+        trigger: workSec, start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 1,
+        invalidateOnRefresh: true, anticipatePin: 1,
+        onUpdate: (self) => {
+          if (workNow) workNow.textContent = String(Math.min(cards.length, Math.floor(self.progress * cards.length) + 1)).padStart(2, '0');
+        }
+      }
+    });
+  }
+
+  /* ---------- 06 · PRINCIPLES: cursor tilt ---------- */
   document.querySelectorAll('.pr-card').forEach((card) => {
     card.addEventListener('pointermove', (e) => {
       const r = card.getBoundingClientRect();
@@ -477,7 +488,7 @@
     card.addEventListener('pointerleave', () => gsap.to(card, { rotateX: 0, rotateY: 0, duration: .8, ease: 'elastic.out(1,.5)' }));
   });
 
-  /* ---------- 12 · ROAD: traveling dot + fill ---------- */
+  /* ---------- 07 · ROAD: traveling dot ---------- */
   const tlFill = document.getElementById('tlFill'), tlDot = document.getElementById('tlDot');
   const tlItems = document.querySelectorAll('.tl-item'), tlBox = document.querySelector('.tl');
   if (tlFill && tlBox) {
@@ -492,7 +503,7 @@
     });
   }
 
-  /* ---------- 13 · STATUS: live clock ---------- */
+  /* ---------- 08 · STATUS: live clock ---------- */
   const stClock = document.getElementById('stClock');
   if (stClock) {
     const tick = () => {
@@ -501,10 +512,64 @@
     tick(); setInterval(tick, 1000);
   }
 
+  /* ---------- 09 · PLAYGROUND: ember particles ---------- */
+  const pc = document.getElementById('playCanvas');
+  if (pc) {
+    const ctx = pc.getContext('2d');
+    const pfield = document.getElementById('playField');
+    let W, H, pts = [], running = true, mx = -9999, my = -9999;
+    const size = () => { W = pc.width = pc.offsetWidth; H = pc.height = pc.offsetHeight; seed(); };
+    function seed() {
+      pts = [];
+      const n = Math.min(160, Math.floor(W * H / 12000));
+      for (let i = 0; i < n; i++) pts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .4, vy: -Math.random() * .5 - .1, r: Math.random() * 2.4 + .8, ph: Math.random() * 6.28 });
+    }
+    size(); window.addEventListener('resize', size);
+    pfield.addEventListener('pointermove', (e) => { const r = pc.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; });
+    pfield.addEventListener('pointerleave', () => { mx = -9999; my = -9999; });
+    new IntersectionObserver((e) => { running = e[0].isIntersecting; }).observe(pc);
+    (function draw(t) {
+      requestAnimationFrame(draw);
+      if (!running) return;
+      ctx.clearRect(0, 0, W, H);
+      const time = t * .001;
+      pts.forEach((p) => {
+        p.x += p.vx + Math.sin(time + p.ph) * .3;
+        p.y += p.vy;
+        const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy);
+        if (d < 120 && d > 1) { p.x += (dx / d) * 3; p.y += (dy / d) * 3; }
+        if (p.y < -10) { p.y = H + 10; p.x = Math.random() * W; }
+        if (p.x < -10) p.x = W + 10; if (p.x > W + 10) p.x = -10;
+        const tw = .35 + .4 * Math.abs(Math.sin(time * 2 + p.ph));
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 7);
+        ctx.fillStyle = 'rgba(255,' + Math.floor(90 + 60 * Math.sin(p.ph)) + ',40,' + tw.toFixed(2) + ')';
+        ctx.fill();
+      });
+    })(0);
+  }
+
+  /* ---------- konami easter egg: OVERDRIVE ---------- */
+  const seq = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  let ki = 0;
+  const toast = document.getElementById('odToast');
+  window.addEventListener('keydown', (e) => {
+    const k = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+    ki = (k === seq[ki]) ? ki + 1 : (k === seq[0] ? 1 : 0);
+    if (ki === seq.length) {
+      ki = 0;
+      const on = document.documentElement.classList.toggle('overdrive');
+      if (toast) {
+        toast.textContent = on ? 'OVERDRIVE ENGAGED' : 'OVERDRIVE OFF';
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2200);
+      }
+    }
+  });
+
   /* ---------- cursor hover for new targets ---------- */
   const ring = document.querySelector('.cursor-ring');
   if (ring) {
-    document.querySelectorAll('.ahead,.pchip,.st-cta,.crow,.svisit,.alinks,.cta-giant a').forEach((el) => {
+    document.querySelectorAll('.ms-go,.chapters a,.svisit,.st-cta').forEach((el) => {
       el.addEventListener('mouseenter', () => ring.classList.add('is-hover'));
       el.addEventListener('mouseleave', () => ring.classList.remove('is-hover'));
     });

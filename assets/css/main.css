@@ -717,3 +717,72 @@ section{position:relative;overflow:hidden}
   .spill{font-size:.7rem;padding:.6em 1em}
   .abody-in p,.alinks{padding-left:.4rem;margin-left:0}
 }
+
+/* ══════════ chapters 01–09 · portfolio-study rebuild (own design) ══════════ */
+
+/* ---- chapter rail ---- */
+.chapters{position:fixed;right:22px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:14px;z-index:60}
+.chapters a{display:flex;align-items:center;gap:8px;text-decoration:none;font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;color:#5a5a60;flex-direction:row-reverse}
+.chapters a i{width:22px;height:2px;background:#333338;transition:width .35s,background .35s}
+.chapters a.on{color:var(--white)}
+.chapters a.on i{width:38px;background:var(--red)}
+.chapters a:hover{color:var(--white)}
+
+/* ---- 02 · MISSIONS ---- */
+.s-missions{background:#0c0c0e;padding:16vh 0}
+.ms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);margin-top:3rem}
+.ms-card{position:relative;border:1px solid #232328;border-radius:20px;padding:2.4rem;background:linear-gradient(165deg,#121215,#0b0b0d);overflow:hidden;transition:border-color .35s,transform .35s;display:flex;flex-direction:column}
+.ms-card::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 60% at 50% 0%,rgba(217,56,30,.14),transparent 60%);opacity:0;transition:opacity .4s}
+.ms-card:hover{border-color:#3d3d44;transform:translateY(-6px)}
+.ms-card:hover::before{opacity:1}
+.ms-no{font-family:var(--mono);font-size:.75rem;letter-spacing:.24em;color:var(--red)}
+.ms-card h3{font-size:1.9rem;margin:1rem 0 .7rem;letter-spacing:-.02em}
+.ms-card p{color:#b9b9bd;line-height:1.65;margin:0 0 1.6rem;flex:1}
+.ms-load{border-top:1px solid #222228;padding-top:1.2rem;margin-bottom:1.8rem}
+.ms-load span{display:block;font-family:var(--mono);font-size:.68rem;letter-spacing:.22em;color:var(--mut);margin-bottom:.5rem}
+.ms-load b{font-family:var(--mono);font-size:.85rem;font-weight:400;color:var(--white);letter-spacing:.06em}
+.ms-go{align-self:flex-start;font-family:var(--mono);font-size:.82rem;letter-spacing:.14em;color:#fff;background:var(--red);border:none;border-radius:999px;padding:1em 1.9em;cursor:pointer;transition:background .3s,transform .3s;font-family:var(--mono)}
+.ms-go:hover{background:#b32d18;transform:translateY(-2px)}
+.ms-go span{display:inline-block;transition:transform .3s}
+.ms-go:hover span{transform:translate(3px,-3px)}
+
+/* ---- 03 · ARSENAL ---- */
+.s-arsenal{background:#0e0c0a;padding:16vh 0;overflow:hidden}
+.arsenal-field{position:relative;height:380px;margin-top:3rem;border:1px dashed #2e2823;border-radius:20px;overflow:hidden;background:radial-gradient(60% 90% at 50% 110%,rgba(217,56,30,.12),transparent 70%)}
+.tag{position:absolute;font-family:var(--mono);font-size:.82rem;letter-spacing:.1em;color:#f3ede2;background:#1c1917;border:1px solid #3a332c;padding:.7em 1.3em;border-radius:6px;white-space:nowrap;will-change:transform;user-select:none;transition:background .3s,border-color .3s,color .3s;box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.tag.hot{background:var(--red);border-color:#ff7a4d;color:#fff;box-shadow:0 0 22px rgba(217,56,30,.55)}
+.tag-hint{margin-top:1.4rem}
+
+/* ---- 05 · WORK · pinned horizontal ---- */
+.s-work{background:#0b0b0c;overflow:hidden}
+.work-pin{height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.work-top{display:flex;justify-content:space-between;align-items:center;width:100%}
+.work-count{font-family:var(--mono);font-size:clamp(1.6rem,3vw,2.4rem);letter-spacing:.1em;color:var(--white);font-variant-numeric:tabular-nums}
+.work-count .wc-sep{color:var(--mut);margin:0 .3em}
+.work-count #workNow{color:var(--red)}
+.work-track{display:flex;gap:clamp(1.2rem,3vw,2.6rem);padding:2.6rem var(--gap);width:max-content;will-change:transform}
+.wcard{flex:0 0 clamp(300px,58vw,540px);border:1px solid #1e1e22;border-radius:20px;overflow:hidden;background:#101013}
+.wcard .scover{min-height:220px}
+.wmeta{padding:1.8rem}
+.wmeta h3{font-size:clamp(1.5rem,2.6vw,2.1rem);letter-spacing:-.02em;margin:.55rem 0 .6rem}
+.wmeta p{color:#b9b9bd;line-height:1.6;margin:0 0 1rem}
+.work-hint{text-align:center;margin-top:.6rem}
+
+/* ---- 09 · PLAYGROUND ---- */
+.s-play{background:#08080a;padding:16vh 0 0;overflow:hidden}
+.play-field{position:relative;height:62vh;min-height:420px;margin-top:3rem;border-top:1px solid #1a1a1e;border-bottom:1px solid #1a1a1e;background:radial-gradient(80% 100% at 50% 100%,rgba(217,56,30,.1),transparent 70%),#0a0a0c}
+#playCanvas{position:absolute;inset:0;width:100%;height:100%}
+.play-hint{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);white-space:nowrap;color:#6f6a5c}
+.od-toast{position:fixed;left:50%;top:24px;transform:translate(-50%,-80px);background:var(--red);color:#fff;font-family:var(--mono);font-size:.8rem;letter-spacing:.24em;padding:1em 2em;border-radius:999px;z-index:80;transition:transform .5s var(--f-smooth)}
+.od-toast.show{transform:translate(-50%,0)}
+html.overdrive{--red:#35e0ff}
+html.overdrive .od-toast{background:#35e0ff;color:#04222e}
+
+@media(max-width:1100px){.chapters{display:none}}
+@media(max-width:900px){
+  .ms-grid{grid-template-columns:1fr}
+  .arsenal-field{height:440px}
+  .tag{font-size:.7rem;padding:.6em 1em}
+  .wcard{flex-basis:82vw}
+  .play-hint{white-space:normal;text-align:center;width:90%}
+}

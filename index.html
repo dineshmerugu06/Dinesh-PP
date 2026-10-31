@@ -89,10 +89,24 @@
   </div>
 </section>
 
-<!-- ══════════ 5 · MANIFESTO — kinetic type ══════════ -->
+
+<!-- ══════════ CHAPTER RAIL ══════════ -->
+<nav class="chapters" aria-label="Chapters">
+  <a href="#manifesto" data-ch="manifesto"><i></i><span>01</span></a>
+  <a href="#missions" data-ch="missions"><i></i><span>02</span></a>
+  <a href="#arsenal" data-ch="arsenal"><i></i><span>03</span></a>
+  <a href="#process" data-ch="process"><i></i><span>04</span></a>
+  <a href="#work" data-ch="work"><i></i><span>05</span></a>
+  <a href="#principles" data-ch="principles"><i></i><span>06</span></a>
+  <a href="#road" data-ch="road"><i></i><span>07</span></a>
+  <a href="#status" data-ch="status"><i></i><span>08</span></a>
+  <a href="#playground" data-ch="playground"><i></i><span>09</span></a>
+</nav>
+
+<!-- ══════════ 5 · 01 MANIFESTO — kinetic type ══════════ -->
 <section class="s-manifesto" id="manifesto">
   <div class="wrap">
-    <p class="micro" data-reveal><span class="p">&gt;</span>MANIFESTO</p>
+    <p class="micro ch" data-reveal><span class="p">&gt;</span>01&nbsp;·&nbsp;MANIFESTO</p>
     <h2 class="mani-lines" aria-label="Design that earns attention. Code that keeps it.">
       <span class="mline"><span>Design that earns</span></span>
       <span class="mline"><span>attention<i>.</i></span></span>
@@ -102,83 +116,53 @@
   </div>
 </section>
 
-<!-- ══════════ 6 · PATHS — branching start (from Réno Énergie) ══════════ -->
-<section class="s-paths" id="paths">
+<!-- ══════════ 6 · 02 MISSIONS — choose your mission ══════════ -->
+<section class="s-missions" id="missions">
   <div class="wrap">
-    <p class="micro micro-dark" data-reveal><span class="p">&gt;</span>TWO&nbsp;WAYS&nbsp;TO&nbsp;START</p>
-    <h2 class="h-lg paths-title" data-reveal>Pick your path.</h2>
-    <div class="path-cards" data-reveal>
-      <button class="path-card" id="pathA" type="button" aria-expanded="false">
-        <span class="path-kicker">PATH A</span>
-        <span class="path-name">I know what I want</span>
-        <span class="path-hint">Jump straight to the build &#8594;</span>
-      </button>
-      <button class="path-card alt" id="pathB" type="button" aria-expanded="false">
-        <span class="path-kicker">PATH B</span>
-        <span class="path-name">Guide me</span>
-        <span class="path-hint">Three steps, zero confusion &#8594;</span>
-      </button>
-    </div>
-    <div class="path-panel" id="panelA" hidden>
-      <p class="panel-label">What are we building?</p>
-      <div class="panel-chips">
-        <a class="pchip magnetic" href="https://wa.me/919398359538?text=Hi%20Dinesh%20%E2%80%94%20I%20want%20a%20website." target="_blank" rel="noopener">A website &#8599;</a>
-        <a class="pchip magnetic" href="https://wa.me/919398359538?text=Hi%20Dinesh%20%E2%80%94%20I%20want%20an%20AI%20agent." target="_blank" rel="noopener">An AI agent &#8599;</a>
-        <a class="pchip magnetic" href="https://wa.me/919398359538?text=Hi%20Dinesh%20%E2%80%94%20I%20want%20a%20redesign." target="_blank" rel="noopener">A redesign &#8599;</a>
-      </div>
-    </div>
-    <div class="path-panel" id="panelB" hidden>
-      <ol class="guide-steps">
-        <li><b>01</b><span>Tell me the goal — one message on WhatsApp is enough.</span></li>
-        <li><b>02</b><span>I study references and show you a sample before any code.</span></li>
-        <li><b>03</b><span>We ship it live — verified on phone and desktop.</span></li>
-      </ol>
-      <a class="pchip solid magnetic" href="https://wa.me/919398359538?text=Hi%20Dinesh%20%E2%80%94%20guide%20me." target="_blank" rel="noopener">Start step 01 &#8599;</a>
+    <p class="micro ch" data-reveal><span class="p">&gt;</span>02&nbsp;·&nbsp;MISSIONS</p>
+    <h2 class="h-lg" data-reveal>Choose your<br>mission.</h2>
+    <div class="ms-grid">
+      <article class="ms-card" data-reveal data-wa="Hi Dinesh — mission accepted: build me a WEBSITE.">
+        <span class="ms-no">M—01</span>
+        <h3>Website</h3>
+        <p>A landing page, portfolio, or business site — designed from references you pick, verified on phone and desktop before launch.</p>
+        <div class="ms-load"><span>LOADOUT</span><b>React · GSAP · Lenis</b></div>
+        <button class="ms-go magnetic" type="button">Choose this mission <span>&#8599;</span></button>
+      </article>
+      <article class="ms-card" data-reveal data-wa="Hi Dinesh — mission accepted: build me an AI AGENT.">
+        <span class="ms-no">M—02</span>
+        <h3>AI Agent</h3>
+        <p>A chatbot or agent that answers questions, takes bookings, and does the boring work — trained on your business.</p>
+        <div class="ms-load"><span>LOADOUT</span><b>Python · LLMs · FastAPI</b></div>
+        <button class="ms-go magnetic" type="button">Choose this mission <span>&#8599;</span></button>
+      </article>
+      <article class="ms-card" data-reveal data-wa="Hi Dinesh — mission accepted: REDESIGN my site.">
+        <span class="ms-no">M—03</span>
+        <h3>Redesign</h3>
+        <p>Your current site, rebuilt to today's standard — same business, brand-new first impression. Nothing you love gets lost.</p>
+        <div class="ms-load"><span>LOADOUT</span><b>Audit · Rebuild · Verify</b></div>
+        <button class="ms-go magnetic" type="button">Choose this mission <span>&#8599;</span></button>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- ══════════ 7 · SERVICES — accordion ══════════ -->
-<section class="s-services" id="services">
+<!-- ══════════ 7 · 03 ARSENAL — ember tags ══════════ -->
+<section class="s-arsenal" id="arsenal">
   <div class="wrap">
-    <p class="micro" data-reveal><span class="p">&gt;</span>WHAT&nbsp;I&nbsp;BUILD</p>
-    <h2 class="h-lg" data-reveal>Three ways<br>I can help.</h2>
-    <div class="acc" data-reveal>
-      <div class="arow">
-        <button class="ahead" type="button" aria-expanded="false">
-          <span class="anum">01</span><span class="atitle">Custom websites</span><span class="aicon" aria-hidden="true"></span>
-        </button>
-        <div class="abody"><div class="abody-in">
-          <p>Landing pages, portfolios, business sites — designed from references you pick, built clean, verified on phone and desktop before it goes live.</p>
-          <a class="alinks" href="https://wa.me/919398359538?text=Hi%20Dinesh%20%E2%80%94%20I%20want%20a%20website." target="_blank" rel="noopener">Start one &#8599;</a>
-        </div></div>
-      </div>
-      <div class="arow">
-        <button class="ahead" type="button" aria-expanded="false">
-          <span class="anum">02</span><span class="atitle">AI agents</span><span class="aicon" aria-hidden="true"></span>
-        </button>
-        <div class="abody"><div class="abody-in">
-          <p>Chatbots and agents that answer questions, take bookings, and do the boring work — trained on your business, wired into your tools.</p>
-          <a class="alinks" href="https://wa.me/919398359538?text=Hi%20Dinesh%20%E2%80%94%20I%20want%20an%20AI%20agent." target="_blank" rel="noopener">Start one &#8599;</a>
-        </div></div>
-      </div>
-      <div class="arow">
-        <button class="ahead" type="button" aria-expanded="false">
-          <span class="anum">03</span><span class="atitle">Redesigns</span><span class="aicon" aria-hidden="true"></span>
-        </button>
-        <div class="abody"><div class="abody-in">
-          <p>Your current site, rebuilt to today's standard — same business, brand-new first impression. Nothing you love gets lost.</p>
-          <a class="alinks" href="https://wa.me/919398359538?text=Hi%20Dinesh%20%E2%80%94%20I%20want%20a%20redesign." target="_blank" rel="noopener">Start one &#8599;</a>
-        </div></div>
-      </div>
+    <p class="micro ch" data-reveal><span class="p">&gt;</span>03&nbsp;·&nbsp;ARSENAL</p>
+    <h2 class="h-lg" data-reveal>The<br>arsenal.</h2>
+    <div class="arsenal-field" id="arsenalField" data-reveal>
+      <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Node.js</span><span class="tag">PostgreSQL</span><span class="tag">Supabase</span><span class="tag">GSAP</span><span class="tag">Three.js</span><span class="tag">LLM apps</span><span class="tag">AI agents</span><span class="tag">Selenium</span><span class="tag">Java</span><span class="tag">Spring Boot</span>
     </div>
+    <p class="micro tag-hint"><span class="p">&gt;</span>MOVE&nbsp;YOUR&nbsp;CURSOR&nbsp;—&nbsp;THEY&nbsp;DODGE</p>
   </div>
 </section>
 
-<!-- ══════════ 8 · PROCESS — drawing timeline ══════════ -->
+<!-- ══════════ 8 · 04 PROCESS — the forge ══════════ -->
 <section class="s-process" id="process">
   <div class="wrap">
-    <p class="micro" data-reveal><span class="p">&gt;</span>THE&nbsp;PROCESS</p>
+    <p class="micro ch" data-reveal><span class="p">&gt;</span>04&nbsp;·&nbsp;THE&nbsp;FORGE</p>
     <h2 class="h-lg" data-reveal>First message<br>to live.</h2>
     <div class="proc-track" data-reveal>
       <div class="proc-rail" aria-hidden="true"><span class="proc-fill" id="procFill"></span></div>
@@ -192,59 +176,50 @@
   </div>
 </section>
 
-<!-- ══════════ 9 · STACK — scatter pills ══════════ -->
-<section class="s-stack" id="stack">
-  <div class="wrap">
-    <p class="micro" data-reveal><span class="p">&gt;</span>THE&nbsp;STACK</p>
-    <h2 class="h-lg" data-reveal>The working<br>stack.</h2>
-    <div class="stack-field" id="stackField" data-reveal>
-      <span class="spill">React</span><span class="spill">TypeScript</span><span class="spill">Python</span><span class="spill">FastAPI</span><span class="spill">Node.js</span><span class="spill">PostgreSQL</span><span class="spill">Supabase</span><span class="spill">GSAP</span><span class="spill">Three.js</span><span class="spill">LLM apps</span><span class="spill">AI agents</span><span class="spill">Selenium</span><span class="spill">Java</span><span class="spill">Spring Boot</span>
+<!-- ══════════ 9 · 05 WORK — pinned horizontal gallery ══════════ -->
+<section class="s-work" id="work">
+  <div class="work-pin">
+    <div class="wrap work-top">
+      <p class="micro ch"><span class="p">&gt;</span>05&nbsp;·&nbsp;WORK</p>
+      <div class="work-count"><span id="workNow">01</span><span class="wc-sep">/</span><span>06</span></div>
     </div>
-    <p class="micro stack-hint"><span class="p">&gt;</span>MOVE&nbsp;YOUR&nbsp;CURSOR&nbsp;—&nbsp;THEY&nbsp;SCATTER</p>
-  </div>
-</section>
-
-<!-- ══════════ 10 · SHOWCASE — editorial rows ══════════ -->
-<section class="s-showcase" id="showcase">
-  <div class="wrap">
-    <p class="micro" data-reveal><span class="p">&gt;</span>SELECTED&nbsp;WORK</p>
-    <h2 class="h-lg" data-reveal>Proof,<br>not promises.</h2>
-    <div class="show-rows">
-      <article class="srow" data-reveal>
+    <div class="work-track" id="workTrack">
+      <article class="wcard">
         <div class="scover c1" aria-hidden="true"><span>IM</span></div>
-        <div class="smeta"><span class="snum">01</span><h3>IMPERIUM</h3><p>Multi-agent AI system — job discovery, ATS resume generation, autonomous workflows.</p><span class="stags">AI · Python · React</span></div>
+        <div class="wmeta"><span class="snum">01</span><h3>IMPERIUM</h3><p>Multi-agent AI system — job discovery, ATS resume generation, autonomous workflows.</p><span class="stags">AI · Python · React</span></div>
       </article>
-      <article class="srow" data-reveal>
+      <article class="wcard">
         <div class="scover c2" aria-hidden="true"><span>KM</span></div>
-        <div class="smeta"><span class="snum">02</span><h3>KeyMind</h3><p>An AI product — from prompt design to an interface people actually use.</p><span class="stags">LLM · Product · UI</span></div>
+        <div class="wmeta"><span class="snum">02</span><h3>KeyMind</h3><p>An AI product — from prompt design to an interface people actually use.</p><span class="stags">LLM · Product · UI</span></div>
       </article>
-      <article class="srow" data-reveal>
+      <article class="wcard">
         <div class="scover c3" aria-hidden="true"><span>AS</span></div>
-        <div class="smeta"><span class="snum">03</span><h3>Auction Space</h3><p>Live auction experience — real-time bidding flow, sharp UI, zero clutter.</p><span class="stags">Web app · Real-time</span></div>
+        <div class="wmeta"><span class="snum">03</span><h3>Auction Space</h3><p>Live auction experience — real-time bidding flow, sharp UI, zero clutter.</p><span class="stags">Web app · Real-time</span></div>
       </article>
-      <article class="srow" data-reveal>
+      <article class="wcard">
         <div class="scover c4" aria-hidden="true"><span>SU</span></div>
-        <div class="smeta"><span class="snum">04</span><h3>Super</h3><p>A high-energy web build — motion-led, fast, unmistakably mine.</p><span class="stags">Motion · Web</span></div>
+        <div class="wmeta"><span class="snum">04</span><h3>Super</h3><p>A high-energy web build — motion-led, fast, unmistakably mine.</p><span class="stags">Motion · Web</span></div>
       </article>
-      <article class="srow" data-reveal>
+      <article class="wcard">
         <div class="scover c5" aria-hidden="true"><span>SI</span></div>
-        <div class="smeta"><span class="snum">05</span><h3>Sreeka Interiors</h3><p>Hyderabad interior studio — calm, premium, built to convert visitors into calls.</p><span class="stags">Business site · Live</span><a class="svisit magnetic" href="https://sreeka-interiors.vercel.app" target="_blank" rel="noopener">Visit live &#8599;</a></div>
+        <div class="wmeta"><span class="snum">05</span><h3>Sreeka Interiors</h3><p>Hyderabad interior studio — calm, premium, built to convert visitors into calls.</p><span class="stags">Business site · Live</span><a class="svisit magnetic" href="https://sreeka-interiors.vercel.app" target="_blank" rel="noopener">Visit live &#8599;</a></div>
       </article>
-      <article class="srow" data-reveal>
+      <article class="wcard">
         <div class="scover c6" aria-hidden="true"><span>PH</span></div>
-        <div class="smeta"><span class="snum">06</span><h3>Photography</h3><p>The eye behind the code — frames, light, and moments worth keeping.</p><span class="stags">Visual journal</span></div>
+        <div class="wmeta"><span class="snum">06</span><h3>Photography</h3><p>The eye behind the code — frames, light, and moments worth keeping.</p><span class="stags">Visual journal</span></div>
       </article>
     </div>
+    <p class="micro work-hint"><span class="p">&gt;</span>SCROLL&nbsp;—&nbsp;THE&nbsp;WORK&nbsp;MOVES&nbsp;SIDEWAYS</p>
   </div>
 </section>
 
-<!-- ══════════ 11 · PRINCIPLES — glassmorphism ══════════ -->
+<!-- ══════════ 10 · 06 PRINCIPLES — glassmorphism ══════════ -->
 <section class="s-principles" id="principles">
   <div class="pr-aurora pa1" aria-hidden="true"></div>
   <div class="pr-aurora pa2" aria-hidden="true"></div>
   <div class="pr-aurora pa3" aria-hidden="true"></div>
   <div class="wrap pr-inner">
-    <p class="micro" data-reveal><span class="p">&gt;</span>PRINCIPLES</p>
+    <p class="micro ch" data-reveal><span class="p">&gt;</span>06&nbsp;·&nbsp;PRINCIPLES</p>
     <h2 class="h-lg" data-reveal>How I work.</h2>
     <div class="pr-grid">
       <div class="pr-card" data-reveal><span class="pr-no">01</span><h3>Sample before code</h3><p>You see the design before I build it. No surprises, ever.</p></div>
@@ -255,10 +230,10 @@
   </div>
 </section>
 
-<!-- ══════════ 12 · ROAD — vertical timeline ══════════ -->
+<!-- ══════════ 11 · 07 ROAD — vertical timeline ══════════ -->
 <section class="s-road" id="road">
   <div class="wrap">
-    <p class="micro" data-reveal><span class="p">&gt;</span>THE&nbsp;ROAD</p>
+    <p class="micro ch" data-reveal><span class="p">&gt;</span>07&nbsp;·&nbsp;THE&nbsp;ROAD</p>
     <h2 class="h-lg" data-reveal>How I got here.</h2>
     <div class="tl" data-reveal>
       <div class="tl-rail" aria-hidden="true"><span class="tl-fill" id="tlFill"></span><span class="tl-dot" id="tlDot"></span></div>
@@ -272,10 +247,10 @@
   </div>
 </section>
 
-<!-- ══════════ 13 · STATUS — availability board ══════════ -->
+<!-- ══════════ 12 · 08 STATUS — availability board ══════════ -->
 <section class="s-status" id="status">
   <div class="wrap">
-    <p class="micro" data-reveal><span class="p">&gt;</span>STATUS</p>
+    <p class="micro ch" data-reveal><span class="p">&gt;</span>08&nbsp;·&nbsp;STATUS</p>
     <div class="status-card" data-reveal>
       <div class="st-head"><span class="st-dot" aria-hidden="true"></span><span>AVAILABLE FOR PROJECTS</span><span class="st-clock" id="stClock">--:--:--</span></div>
       <div class="st-grid">
@@ -287,6 +262,19 @@
       <a class="st-cta magnetic" href="https://wa.me/919398359538?text=Hi%20Dinesh%20%E2%80%94%20I%20have%20a%20project." target="_blank" rel="noopener">Start a project &#8599;</a>
     </div>
   </div>
+</section>
+
+<!-- ══════════ 13 · 09 PLAYGROUND — embers + easter egg ══════════ -->
+<section class="s-play" id="playground">
+  <div class="wrap">
+    <p class="micro ch" data-reveal><span class="p">&gt;</span>09&nbsp;·&nbsp;PLAYGROUND</p>
+    <h2 class="h-lg" data-reveal>Touch<br>everything.</h2>
+  </div>
+  <div class="play-field" id="playField">
+    <canvas id="playCanvas" aria-hidden="true"></canvas>
+    <p class="play-hint micro"><span class="p">&gt;</span>STIR&nbsp;THE&nbsp;EMBERS.&nbsp;RUMOR:&nbsp;&uarr;&uarr;&darr;&darr;&larr;&rarr;&larr;&rarr;BA&nbsp;DOES&nbsp;SOMETHING.</p>
+  </div>
+  <div class="od-toast" id="odToast" role="status">OVERDRIVE ENGAGED</div>
 </section>
 
 <!-- ══════════ 14 · CONTACT — giant CTA ══════════ -->
@@ -307,6 +295,7 @@
     <a href="#top" class="to-top magnetic">Back to top &#8593;</a>
   </div>
 </section>
+
 
 <script src="./assets/js/vendor/gsap.min.js"></script>
 <script src="./assets/js/vendor/ScrollTrigger.min.js"></script>
