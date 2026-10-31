@@ -588,30 +588,44 @@
 
   /* Desktop: pinned scroll cinema. */
   mm.add('(min-width: 901px)', function () {
-    /* 04 — ghost sequence */
+    /* 04 — ghost sequence: first ghost live at pin start (like the original),
+       scroll-velocity blur on the wrapper = the signature transition */
     var ghosts = qsa('#st-intro .st-g');
-    gsap.set(ghosts, { scale: 0.96 });
+    var ghostWrap = document.querySelector('#st-intro .st-ghost');
+    gsap.set(ghosts[0], { opacity: 1, filter: 'blur(0px)', scale: 1 });
+    gsap.set([ghosts[1], ghosts[2]], { opacity: 0, filter: 'blur(22px)', scale: 0.94 });
     var itl = gsap.timeline({ scrollTrigger: { trigger: '#st-intro', start: 'top top',
-      end: '+=260%', pin: '#stIntroPin', scrub: 1 } });
-    ghosts.forEach(function (g, i) {
-      itl.to(g, { opacity: 1, filter: 'blur(0px)', scale: 1, duration: 1, ease: 'power2.out' }, i * 2);
-      if (i < ghosts.length - 1)
-        itl.to(g, { opacity: 0, filter: 'blur(18px)', scale: 0.96, duration: 1, ease: 'power2.in' }, i * 2 + 1);
-    });
-    itl.to('#stIntroBar', { scaleX: 1, ease: 'none', duration: ghosts.length * 2 }, 0);
+      end: '+=260%', pin: '#stIntroPin', scrub: 1,
+      onUpdate: function (self) {
+        var v = Math.min(Math.abs(self.getVelocity()) / 2600, 1);
+        ghostWrap.style.filter = v > 0.02 ? 'blur(' + (v * 20).toFixed(1) + 'px)' : '';
+      } } });
+    itl.to(ghosts[0], { opacity: 0, filter: 'blur(22px)', scale: 0.94, duration: 1, ease: 'power2.in' }, 0)
+       .to(ghosts[1], { opacity: 1, filter: 'blur(0px)', scale: 1, duration: 1, ease: 'power2.out' }, 0.6)
+       .to(ghosts[1], { opacity: 0, filter: 'blur(22px)', scale: 0.94, duration: 1, ease: 'power2.in' }, 1.8)
+       .to(ghosts[2], { opacity: 1, filter: 'blur(0px)', scale: 1, duration: 1, ease: 'power2.out' }, 2.4)
+       .to('#stIntroBar', { scaleX: 1, ease: 'none', duration: 3.4 }, 0);
 
-    /* 05 — dialog */
+    /* 05 — dialog: first line live at pin start, rest advance on scroll */
+    var dlines = qsa('#st-dialog .st-line');
+    gsap.set(dlines[0], { opacity: 1, y: 0 });
     var dtl = gsap.timeline({ scrollTrigger: { trigger: '#st-dialog', start: 'top top',
       end: '+=170%', pin: '#stDialogPin', scrub: 1 } });
-    dtl.to('#st-dialog .st-line', { opacity: 1, y: 0, duration: 0.5, stagger: 0.5 }, 0)
-       .to('#stDlgBar', { scaleX: 1, ease: 'none', duration: 2 }, 0);
+    dtl.to([dlines[1], dlines[2]], { opacity: 1, y: 0, duration: 0.5, stagger: 0.6 }, 0.2)
+       .to('#stDlgBar', { scaleX: 1, ease: 'none', duration: 1.8 }, 0);
 
-    /* 06 — pale ghost replay */
+    /* 06 — pale ghost replay, with velocity blur */
     var g2 = qsa('#st-panel .st-g');
+    var g2Wrap = document.querySelector('#st-panel .st-ghost');
+    gsap.set(g2[0], { opacity: 1, filter: 'blur(0px)' });
+    gsap.set(g2[1], { opacity: 0, filter: 'blur(20px)' });
     var ptl = gsap.timeline({ scrollTrigger: { trigger: '#st-panel .st-round',
-      start: 'top 85%', end: 'bottom 45%', scrub: 1 } });
-    ptl.to(g2[0], { opacity: 1, filter: 'blur(0px)', duration: 1 }, 0)
-       .to(g2[0], { opacity: 0, filter: 'blur(16px)', duration: 1 }, 1)
+      start: 'top 85%', end: 'bottom 45%', scrub: 1,
+      onUpdate: function (self) {
+        var v = Math.min(Math.abs(self.getVelocity()) / 2600, 1);
+        g2Wrap.style.filter = v > 0.02 ? 'blur(' + (v * 18).toFixed(1) + 'px)' : '';
+      } } });
+    ptl.to(g2[0], { opacity: 0, filter: 'blur(20px)', duration: 1 }, 0.4)
        .to(g2[1], { opacity: 1, filter: 'blur(0px)', duration: 1 }, 1.2);
 
     /* 10 — keyword morph */
