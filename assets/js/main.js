@@ -206,6 +206,7 @@
   /* ---------- 6 · NUMBERS: count up + ignite ---------- */
   document.querySelectorAll('.num').forEach((num) => {
     const el = num.querySelector('.num-count');
+    if (!el) return; /* new PROOF stats use .num[data-count] instead */
     const to = +el.dataset.to;
     ScrollTrigger.create({
       trigger: num, start: 'top 78%', once: true,
@@ -241,4 +242,114 @@
   setTimeout(clearLoader, 5000);
 
   window.__lenis = lenis;
+})();
+
+/* ══════════ sections 4–11 · CREED / WORK / ARSENAL / METHOD / SIGNAL / PROOF / TRANSMIT / FINALE ══════════ */
+(function () {
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ---------- 4 · CREED: scroll-scrubbed word reveal ---------- */
+  const creed = document.getElementById('creedLine');
+  if (creed) {
+    const words = [];
+    const split = (node) => {
+      Array.from(node.childNodes).forEach((child) => {
+        if (child.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          child.textContent.split(/(\s+)/).forEach((part) => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+            const s = document.createElement('span');
+            s.className = 'w'; s.textContent = part;
+            frag.appendChild(s); words.push(s);
+          });
+          node.replaceChild(frag, child);
+        } else if (child.nodeType === 1) split(child);
+      });
+    };
+    split(creed);
+    gsap.set(words, { opacity: 0.12 });
+    gsap.to(words, {
+      opacity: 1, stagger: 0.05, ease: 'none',
+      scrollTrigger: { trigger: creed, start: 'top 82%', end: 'bottom 45%', scrub: 0.6 }
+    });
+  }
+
+  /* ---------- 5 · WORK: filmstrip nav + keyboard ---------- */
+  const film = document.getElementById('film');
+  const stepX = () => {
+    const f = film && film.querySelector('.frame');
+    return f ? f.getBoundingClientRect().width + 24 : 340;
+  };
+  const prev = document.getElementById('workPrev');
+  const next = document.getElementById('workNext');
+  if (film && prev) prev.addEventListener('click', () => film.scrollBy({ left: -stepX(), behavior: 'smooth' }));
+  if (film && next) next.addEventListener('click', () => film.scrollBy({ left: stepX(), behavior: 'smooth' }));
+  if (film) film.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); film.scrollBy({ left: stepX(), behavior: 'smooth' }); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); film.scrollBy({ left: -stepX(), behavior: 'smooth' }); }
+  });
+
+  /* ---------- 6 · ARSENAL: tabs ---------- */
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach((t) => { t.classList.remove('is-on'); t.setAttribute('aria-selected', 'false'); });
+      document.querySelectorAll('.panel').forEach((p) => p.classList.remove('is-on'));
+      tab.classList.add('is-on');
+      tab.setAttribute('aria-selected', 'true');
+      const panel = document.querySelector('.panel[data-panel="' + tab.dataset.tab + '"]');
+      if (panel) {
+        panel.classList.add('is-on');
+        gsap.fromTo(panel.children,
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.45, stagger: 0.07, ease: 'power2.out', overwrite: true });
+      }
+      ScrollTrigger.refresh();
+    });
+  });
+
+  /* ---------- 9 · PROOF: count-up on scroll ---------- */
+  document.querySelectorAll('.num[data-count]').forEach((el) => {
+    const target = parseInt(el.dataset.count, 10) || 0;
+    ScrollTrigger.create({
+      trigger: el, start: 'top 88%', once: true,
+      onEnter: () => {
+        const o = { v: 0 };
+        gsap.to(o, {
+          v: target, duration: 1.6, ease: 'power2.out',
+          onUpdate: () => { el.textContent = String(Math.round(o.v)).padStart(2, '0'); }
+        });
+      }
+    });
+  });
+
+  /* ---------- 8 + 11 · live IST clocks ---------- */
+  const tickClocks = () => {
+    try {
+      const t = new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour12: false });
+      const s1 = document.getElementById('istClock'); if (s1) s1.textContent = t;
+      const s2 = document.getElementById('footClock'); if (s2) s2.textContent = t.slice(0, 5);
+    } catch (e) { /* clock unavailable — labels stay as fallback */ }
+  };
+  tickClocks();
+  setInterval(tickClocks, 1000);
+
+  /* ---------- 10 · TRANSMIT: chips open WhatsApp with prefilled text ---------- */
+  document.querySelectorAll('.chip').forEach((chip) => {
+    chip.addEventListener('click', () => {
+      window.open('https://wa.me/919398359538?text=' + encodeURIComponent(chip.dataset.wa || 'Hi Dinesh.'), '_blank', 'noopener');
+    });
+  });
+
+  /* ---------- cursor hover for new interactive targets ---------- */
+  const ring = document.querySelector('.cursor-ring');
+  if (ring) {
+    document.querySelectorAll('.wbtn, .tab, .chip, .frame-link, .btn-line, .to-top').forEach((el) => {
+      el.addEventListener('mouseenter', () => ring.classList.add('is-hover'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('is-hover'));
+    });
+  }
+
+  ScrollTrigger.refresh();
 })();
