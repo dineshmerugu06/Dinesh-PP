@@ -549,3 +549,108 @@
 
   ScrollTrigger.refresh();
 })();
+
+/* KT sections 4-11 — fresh code in the string-tune UI language (study only, written from scratch). */
+(function () {
+  // No-JS/no-GSAP fallback: reveal everything.
+  if (!window.gsap || !window.ScrollTrigger) {
+    document.querySelectorAll('[data-kt] span, [data-kt]').forEach(function (el) {
+      el.style.transform = 'none'; el.style.opacity = '1';
+    });
+    return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+  var EASE = 'cubic-bezier(.35,.35,0,1)';
+
+  // Line-mask reveals. gsap.set owns the initial state (CSS % transforms decompose
+  // to px in GSAP and would never clear).
+  document.querySelectorAll('[data-kt="lines"]').forEach(function (block) {
+    var spans = block.querySelectorAll(':scope > span');
+    if (!spans.length) return;
+    gsap.set(spans, { yPercent: 110 });
+    gsap.to(spans, {
+      yPercent: 0, duration: 1.1, ease: 'power4.out', stagger: 0.12,
+      scrollTrigger: { trigger: block, start: 'top 82%' }
+    });
+  });
+
+  // Fade-ups.
+  document.querySelectorAll('[data-kt="fade"]').forEach(function (el) {
+    gsap.to(el, {
+      opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 88%' }
+    });
+  });
+
+  // Staggered rows.
+  document.querySelectorAll('[data-kt="rows"]').forEach(function (wrap) {
+    var items = wrap.querySelectorAll(':scope > li, :scope > a');
+    if (!items.length) return;
+    gsap.to(items, {
+      opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.1,
+      scrollTrigger: { trigger: wrap, start: 'top 80%' }
+    });
+  });
+
+  // Staggered cards.
+  document.querySelectorAll('[data-kt="cards"]').forEach(function (grid) {
+    var cards = grid.querySelectorAll(':scope > .kt-card');
+    if (!cards.length) return;
+    gsap.to(cards, {
+      opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.09,
+      scrollTrigger: { trigger: grid, start: 'top 80%' }
+    });
+  });
+
+  // Interstitial: lines drift horizontally on scrub (alternating directions).
+  var shiftLines = document.querySelectorAll('.kt-shift-l');
+  shiftLines.forEach(function (line, i) {
+    var dir = i % 2 === 0 ? 1 : -1;
+    gsap.fromTo(line, { xPercent: 7 * dir }, {
+      xPercent: -7 * dir, ease: 'none',
+      scrollTrigger: { trigger: '#kt-shift', start: 'top bottom', end: 'bottom top', scrub: 1 }
+    });
+  });
+
+  // Philosophy: layers parallax at different speeds.
+  document.querySelectorAll('.kt-layer').forEach(function (layer) {
+    var sp = parseFloat(layer.getAttribute('data-speed') || '1');
+    gsap.to(layer, {
+      yPercent: (1 - sp) * 34, ease: 'none',
+      scrollTrigger: { trigger: '#kt-look', start: 'top bottom', end: 'bottom top', scrub: 1 }
+    });
+  });
+
+  // Card glare follows cursor.
+  if (window.matchMedia('(pointer:fine)').matches) {
+    document.querySelectorAll('.kt-card').forEach(function (card) {
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        card.style.setProperty('--gx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+        card.style.setProperty('--gy', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+      });
+    });
+    // Magnetic buttons.
+    document.querySelectorAll('.kt-btn').forEach(function (btn) {
+      var xTo = gsap.quickTo(btn, 'x', { duration: 0.4, ease: 'power3' });
+      var yTo = gsap.quickTo(btn, 'y', { duration: 0.4, ease: 'power3' });
+      btn.addEventListener('pointermove', function (e) {
+        var r = btn.getBoundingClientRect();
+        xTo((e.clientX - r.left - r.width / 2) * 0.28);
+        yTo((e.clientY - r.top - r.height / 2) * 0.28);
+      });
+      btn.addEventListener('pointerleave', function () { xTo(0); yTo(0); });
+    });
+  }
+
+  // Back to top.
+  var top = document.querySelector('[data-kt-top]');
+  if (top) top.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (window.__lenis) window.__lenis.scrollTo(0, { duration: 1.6 });
+    else window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+})();
