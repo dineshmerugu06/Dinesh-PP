@@ -153,46 +153,58 @@
     }, 2600);
   }
 
-  /* ---------- MAGIC 4 · PRINCIPLES: scroll-driven text fill ---------- */
-  const prinTitle = document.getElementById('prinTitle');
-  if (prinTitle) {
-    const html = prinTitle.innerHTML.replace(/<br>/g, ' <br> ');
-    prinTitle.innerHTML = html.split(/\s+/).map(w =>
-      w === '<br>' ? '<br>' : `<span class="w">${w}</span>`).join(' ');
-    const words = prinTitle.querySelectorAll('.w');
+  /* ---------- 4 · CREED: scroll-driven word illumination ---------- */
+  document.querySelectorAll('.creed-line.fill-text').forEach((line) => {
+    const words = line.textContent.trim().split(/\s+/);
+    line.innerHTML = words.map(w => {
+      const m = w.match(/^(.+?)([.,!?;:]+)$/);
+      return m ? `<span class="w">${m[1]}${m[2]}</span>` : `<span class="w">${w}</span>`;
+    }).join(' ');
+    // restore <em> styling: re-wrap words that were inside em (alive, and, I)
+    line.querySelectorAll('.w').forEach(sp => {
+      if (['alive', 'and', 'I'].includes(sp.textContent.replace(/[.,!?;:]/g, ''))) {
+        sp.innerHTML = `<em>${sp.innerHTML}</em>`;
+      }
+    });
+    const spans = line.querySelectorAll('.w');
     ScrollTrigger.create({
-      trigger: '.s-principles', start: 'top 70%', end: 'center 40%', scrub: 0.6,
+      trigger: line, start: 'top 78%', end: 'top 30%', scrub: 0.5,
       onUpdate: (self) => {
-        const n = Math.floor(self.progress * words.length);
-        words.forEach((w, i) => w.classList.toggle('lit', i <= n));
+        const n = Math.floor(self.progress * spans.length);
+        spans.forEach((s, i) => s.classList.toggle('lit', i < n));
       }
-    });
-  }
-
-  /* ---------- MAGIC 7 · FOR: accordion ---------- */
-  document.querySelectorAll('.s-for .row').forEach((row) => {
-    row.addEventListener('click', () => {
-      const wasOpen = row.classList.contains('open');
-      document.querySelectorAll('.s-for .row.open').forEach(r => r.classList.remove('open'));
-      if (!wasOpen) row.classList.add('open');
-      setTimeout(() => ScrollTrigger.refresh(), 600);
     });
   });
 
-  /* ---------- MAGIC 8 · CLARITY: counting numerals ---------- */
-  document.querySelectorAll('.count').forEach((el) => {
-    const to = +el.dataset.to;
+  /* ---------- 8 · PROCESS: numerals count + ignite ---------- */
+  document.querySelectorAll('.step').forEach((step) => {
+    const num = step.querySelector('.step-num');
+    const to = +num.dataset.count;
     ScrollTrigger.create({
-      trigger: el, start: 'top 85%', once: true,
+      trigger: step, start: 'top 75%', once: true,
       onEnter: () => {
-        const obj = { v: 0 };
-        gsap.to(obj, { v: to, duration: 1.6, ease: 'power2.out',
-          onUpdate: () => el.textContent = Math.round(obj.v) });
+        step.classList.add('lit');
+        const o = { v: 0 };
+        gsap.to(o, { v: to, duration: 1.1, ease: 'power2.out',
+          onUpdate: () => num.textContent = '0' + Math.round(o.v) });
       }
     });
   });
 
-  /* ---------- MAGIC 9 · FOOTER: live IST clock ---------- */
+  /* ---------- 7 · AUDIENCE: tab switcher ---------- */
+  const tabs = document.querySelectorAll('.aud-tab');
+  const panels = document.querySelectorAll('.aud-panel');
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const panel = document.querySelector(`.aud-panel[data-aud="${tab.dataset.aud}"]`);
+      if (panel) panel.classList.add('active');
+    });
+  });
+
+  /* ---------- 9 · FINALE: live IST clock ---------- */
   const clock = document.getElementById('istClock');
   if (clock) {
     const tick = () => {
@@ -201,6 +213,12 @@
     };
     tick(); setInterval(tick, 15000);
   }
+
+  /* ---------- cursor: new hover targets ---------- */
+  document.querySelectorAll('.blade, .work, .aud-tab, .btn-big').forEach((el) => {
+    el.addEventListener('mouseenter', () => ring && ring.classList.add('is-hover'));
+    el.addEventListener('mouseleave', () => ring && ring.classList.remove('is-hover'));
+  });
 
   /* ---------- loader: clears on window load, never gated on 3D ---------- */
   const clearLoader = () => document.querySelector('.loader').classList.add('done');
