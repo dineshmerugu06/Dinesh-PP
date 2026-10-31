@@ -256,3 +256,46 @@ section{position:relative;overflow:hidden}
   transition:opacity .8s var(--f-smooth),visibility .8s}
 .loader.done{opacity:0;visibility:hidden}
 .loader .mark{font-family:var(--mono);color:var(--red);font-size:.9rem;letter-spacing:.3em}
+
+/* ══════════ MAGIC: unique per section (Awwwards study, own implementation) ══════════ */
+
+/* 4 · PRINCIPLES — scroll-driven text fill */
+.s-principles .h-xl .w{display:inline-block;color:#3a3a3c;transition:color .3s}
+.s-principles .h-xl .w.lit{color:var(--white)}
+.s-principles .h-xl .w.lit em{color:var(--red)}
+
+/* 5 · SKILLS — hover ignite */
+.s-skills .tech{position:relative;overflow:hidden;cursor:default;transition:transform .35s var(--f-smooth)}
+.s-skills .tech::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(217,56,30,.14),transparent);transform:translateX(-101%);transition:transform .55s var(--f-smooth);pointer-events:none}
+.s-skills .tech:hover::before{transform:translateX(101%)}
+.s-skills .tech:hover{transform:translateX(10px)}
+.s-skills .tech:hover .arr{transform:translateX(8px);color:var(--red)}
+.s-skills .tech .arr{display:inline-block;transition:transform .35s,color .35s}
+
+/* 6 · HUB — cinematic hover */
+.s-hub .cell{position:relative;overflow:hidden;transition:transform .4s var(--f-smooth),border-color .4s}
+.s-hub .cell::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(217,56,30,.22),transparent 60%);opacity:0;transition:opacity .45s;pointer-events:none}
+.s-hub .cell:hover{transform:translateY(-6px) scale(1.015);border-color:rgba(217,56,30,.55)}
+.s-hub .cell:hover::after{opacity:1}
+.s-hub .cell h3{transition:transform .4s var(--f-smooth)}
+.s-hub .cell:hover h3{transform:translateX(6px)}
+.s-hub .cell .idx{transition:transform .4s var(--f-smooth),color .4s;display:inline-block}
+.s-hub .cell:hover .idx{transform:scale(1.35);color:var(--red)}
+
+/* 7 · FOR — accordion */
+.s-for .row{cursor:pointer}
+.s-for .row .more{max-height:0;overflow:hidden;transition:max-height .55s var(--f-smooth),margin .4s}
+.s-for .row.open .more{max-height:12rem;margin-top:.9rem}
+.s-for .row .arr{transition:transform .45s var(--f-smooth)}
+.s-for .row.open .arr{transform:rotate(90deg);color:var(--red)}
+.s-for .row{transition:background .35s,padding .35s}
+.s-for .row.open{background:rgba(217,56,30,.06)}
+
+/* 8 · CLARITY — counting numerals */
+.s-clarity .stats{display:flex;gap:clamp(1.5rem,4vw,4rem);margin:2.2rem 0 0;flex-wrap:wrap}
+.s-clarity .stat b{display:block;font-size:clamp(2.4rem,6vw,4.2rem);font-weight:700;letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums}
+.s-clarity .stat span{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;color:#666;text-transform:uppercase}
+
+/* 9 · FOOTER — live clock */
+.s-footer .clock{font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;color:var(--mut)}
+.s-footer .clock b{color:var(--white);font-weight:400}

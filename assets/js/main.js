@@ -153,6 +153,55 @@
     }, 2600);
   }
 
+  /* ---------- MAGIC 4 · PRINCIPLES: scroll-driven text fill ---------- */
+  const prinTitle = document.getElementById('prinTitle');
+  if (prinTitle) {
+    const html = prinTitle.innerHTML.replace(/<br>/g, ' <br> ');
+    prinTitle.innerHTML = html.split(/\s+/).map(w =>
+      w === '<br>' ? '<br>' : `<span class="w">${w}</span>`).join(' ');
+    const words = prinTitle.querySelectorAll('.w');
+    ScrollTrigger.create({
+      trigger: '.s-principles', start: 'top 70%', end: 'center 40%', scrub: 0.6,
+      onUpdate: (self) => {
+        const n = Math.floor(self.progress * words.length);
+        words.forEach((w, i) => w.classList.toggle('lit', i <= n));
+      }
+    });
+  }
+
+  /* ---------- MAGIC 7 · FOR: accordion ---------- */
+  document.querySelectorAll('.s-for .row').forEach((row) => {
+    row.addEventListener('click', () => {
+      const wasOpen = row.classList.contains('open');
+      document.querySelectorAll('.s-for .row.open').forEach(r => r.classList.remove('open'));
+      if (!wasOpen) row.classList.add('open');
+      setTimeout(() => ScrollTrigger.refresh(), 600);
+    });
+  });
+
+  /* ---------- MAGIC 8 · CLARITY: counting numerals ---------- */
+  document.querySelectorAll('.count').forEach((el) => {
+    const to = +el.dataset.to;
+    ScrollTrigger.create({
+      trigger: el, start: 'top 85%', once: true,
+      onEnter: () => {
+        const obj = { v: 0 };
+        gsap.to(obj, { v: to, duration: 1.6, ease: 'power2.out',
+          onUpdate: () => el.textContent = Math.round(obj.v) });
+      }
+    });
+  });
+
+  /* ---------- MAGIC 9 · FOOTER: live IST clock ---------- */
+  const clock = document.getElementById('istClock');
+  if (clock) {
+    const tick = () => {
+      clock.textContent = new Date().toLocaleTimeString('en-IN',
+        { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit' });
+    };
+    tick(); setInterval(tick, 15000);
+  }
+
   /* ---------- loader: clears on window load, never gated on 3D ---------- */
   const clearLoader = () => document.querySelector('.loader').classList.add('done');
   window.addEventListener('load', () => setTimeout(clearLoader, 500));
