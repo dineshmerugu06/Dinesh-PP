@@ -153,69 +153,84 @@
     }, 2600);
   }
 
-  /* ---------- 4 · CREED: scroll-driven word illumination ---------- */
-  document.querySelectorAll('.creed-line.fill-text').forEach((line) => {
-    const words = line.textContent.trim().split(/\s+/);
-    line.innerHTML = words.map(w => {
-      const m = w.match(/^(.+?)([.,!?;:]+)$/);
-      return m ? `<span class="w">${m[1]}${m[2]}</span>` : `<span class="w">${w}</span>`;
-    }).join(' ');
-    // restore <em> styling: re-wrap words that were inside em (alive, and, I)
-    line.querySelectorAll('.w').forEach(sp => {
-      if (['alive', 'and', 'I'].includes(sp.textContent.replace(/[.,!?;:]/g, ''))) {
-        sp.innerHTML = `<em>${sp.innerHTML}</em>`;
-      }
-    });
-    const spans = line.querySelectorAll('.w');
-    ScrollTrigger.create({
-      trigger: line, start: 'top 78%', end: 'top 30%', scrub: 0.5,
-      onUpdate: (self) => {
-        const n = Math.floor(self.progress * spans.length);
-        spans.forEach((s, i) => s.classList.toggle('lit', i < n));
-      }
-    });
-  });
+  /* ---------- 4 · NOW: live clock + date ---------- */
+  const nowClock = document.getElementById('nowClock');
+  const nowDate = document.getElementById('nowDate');
+  const doorClock = document.getElementById('doorClock');
+  const tickNow = () => {
+    const d = new Date();
+    const t = d.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit' });
+    if (nowClock) nowClock.textContent = t;
+    if (doorClock) doorClock.textContent = t;
+    if (nowDate) nowDate.textContent = d.toLocaleDateString('en-IN',
+      { timeZone: 'Asia/Kolkata', weekday: 'long', day: 'numeric', month: 'long' });
+  };
+  tickNow(); setInterval(tickNow, 10000);
 
-  /* ---------- 8 · PROCESS: numerals count + ignite ---------- */
-  document.querySelectorAll('.step').forEach((step) => {
-    const num = step.querySelector('.step-num');
-    const to = +num.dataset.count;
-    ScrollTrigger.create({
-      trigger: step, start: 'top 75%', once: true,
-      onEnter: () => {
-        step.classList.add('lit');
-        const o = { v: 0 };
-        gsap.to(o, { v: to, duration: 1.1, ease: 'power2.out',
-          onUpdate: () => num.textContent = '0' + Math.round(o.v) });
-      }
+  /* ---------- 5 · PLAYGROUND ---------- */
+  // tilt card
+  const tiltCard = document.getElementById('tiltCard');
+  if (tiltCard) {
+    const stage = tiltCard.parentElement;
+    stage.addEventListener('mousemove', (e) => {
+      const r = stage.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      tiltCard.style.transform = `rotateY(${x * 36}deg) rotateX(${-y * 36}deg)`;
     });
-  });
-
-  /* ---------- 7 · AUDIENCE: tab switcher ---------- */
-  const tabs = document.querySelectorAll('.aud-tab');
-  const panels = document.querySelectorAll('.aud-panel');
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      panels.forEach(p => p.classList.remove('active'));
-      tab.classList.add('active');
-      const panel = document.querySelector(`.aud-panel[data-aud="${tab.dataset.aud}"]`);
-      if (panel) panel.classList.add('active');
+    stage.addEventListener('mouseleave', () => {
+      tiltCard.style.transform = 'rotateY(0deg) rotateX(0deg)';
     });
-  });
-
-  /* ---------- 9 · FINALE: live IST clock ---------- */
-  const clock = document.getElementById('istClock');
-  if (clock) {
-    const tick = () => {
-      clock.textContent = new Date().toLocaleTimeString('en-IN',
-        { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit' });
-    };
-    tick(); setInterval(tick, 15000);
+  }
+  // motion stage: tap to fire choreography
+  const mStage = document.getElementById('motionStage');
+  if (mStage) {
+    const dots = mStage.querySelectorAll('span');
+    gsap.set(dots, { y: 0, backgroundColor: '#3a3a3e' });
+    let busy = false;
+    mStage.addEventListener('click', () => {
+      if (busy) return; busy = true;
+      gsap.timeline({ onComplete: () => busy = false })
+        .to(dots, { y: -46, backgroundColor: '#d9381e', duration: 0.32, ease: 'power2.out', stagger: 0.06 })
+        .to(dots, { y: 0, backgroundColor: '#3a3a3e', duration: 0.55, ease: 'bounce.out', stagger: 0.06 });
+    });
+  }
+  // type scaler
+  const typeDemo = document.getElementById('typeDemo');
+  const typeRange = document.getElementById('typeRange');
+  if (typeDemo && typeRange) {
+    const apply = () => typeDemo.style.fontSize = typeRange.value + 'rem';
+    typeRange.addEventListener('input', apply); apply();
   }
 
+  /* ---------- 6 · NUMBERS: count up + ignite ---------- */
+  document.querySelectorAll('.num').forEach((num) => {
+    const el = num.querySelector('.num-count');
+    const to = +el.dataset.to;
+    ScrollTrigger.create({
+      trigger: num, start: 'top 78%', once: true,
+      onEnter: () => {
+        num.classList.add('lit');
+        const o = { v: 0 };
+        gsap.to(o, { v: to, duration: 1.8, ease: 'power3.out',
+          onUpdate: () => el.textContent = Math.round(o.v) });
+      }
+    });
+  });
+
+  /* ---------- 8 · QA accordion ---------- */
+  document.querySelectorAll('.qa-q').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const qa = btn.parentElement;
+      const wasOpen = qa.classList.contains('open');
+      document.querySelectorAll('.qa.open').forEach(q => q.classList.remove('open'));
+      if (!wasOpen) qa.classList.add('open');
+      setTimeout(() => ScrollTrigger.refresh(), 550);
+    });
+  });
+
   /* ---------- cursor: new hover targets ---------- */
-  document.querySelectorAll('.blade, .work, .aud-tab, .btn-big').forEach((el) => {
+  document.querySelectorAll('.toy, .dish, .door, .qa-q, .aud-tab, .btn-big').forEach((el) => {
     el.addEventListener('mouseenter', () => ring && ring.classList.add('is-hover'));
     el.addEventListener('mouseleave', () => ring && ring.classList.remove('is-hover'));
   });
