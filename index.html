@@ -4,130 +4,209 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dinesh Kumar — Frontend Developer</title>
-<meta name="description" content="Dinesh Kumar builds websites with presence and precision. Frontend, AI-assisted.">
-<link rel="stylesheet" href="assets/css/main.css">
+<meta name="description" content="Dinesh Kumar — frontend developer. React, Next.js, Three.js. Portfolio 2026.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Crect width='8' height='8' rx='2' fill='%23d9381e'/%3E%3Crect x='3' y='2' width='2' height='4' fill='%23fff'/%3E%3Crect x='2' y='3' width='4' height='2' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="./assets/css/main.css">
+<script type="importmap">
+{"imports":{"three":"./assets/js/vendor/three.module.js","three/addons/":"./assets/js/vendor/addons/"}}
+</script>
 </head>
 <body>
-<div class="progress-bar" id="progressBar"></div>
 
-<!-- 1. HERO -->
-<header class="s-hero" id="hero">
-  <canvas id="hero3d"></canvas>
-  <h1 class="hero-giant">Dinesh Kumar</h1>
-  <span class="mono hero-tr">Dinesh Kumar ©</span>
-  <span class="mono hero-label-1">&gt;REACT NEXTJS</span>
-  <span class="mono hero-label-2">PORTFOLIO 2026</span>
-  <span class="mono hero-label-3">&gt;FRONTEND DEVELOPER</span>
-  <div class="hero-pixel-logo"></div>
-  <nav class="hero-nav-min">
-    <a href="#work" class="mono">Projects</a>
-    <a href="#contact" class="mono">Contact</a>
-  </nav>
-</header>
+<div class="loader"><div class="mark">DINESH&nbsp;KUMAR&nbsp;—&nbsp;LOADING</div></div>
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="topbar" aria-hidden="true"><span></span></div>
 
-<!-- 2. FOCUS INTERSTITIAL -->
-<section class="s-focus" id="focus">
-  <div class="focus-stage"><p class="focus-word">Focus</p></div>
-  <div class="focus-stage"><p class="focus-word">Keep Scrolling</p></div>
-  <div class="focus-stage"><p class="focus-word">The Craft <em>Awakened</em></p></div>
-  <div class="focus-stage"><p class="focus-word">Take it…</p></div>
-  <div class="focus-stage"><p class="focus-word">And <em>build…</em></p></div>
+<!-- ══════════ 1 · HERO ══════════ -->
+<section class="s-hero" id="top">
+  <canvas id="inkwash"></canvas>
+  <canvas id="dragon-canvas"></canvas>
+
+  <header class="hud-top">
+    <a class="brand" href="#top">
+      <span class="brand-mark"><svg viewBox="0 0 8 8"><rect x="3" y="1" width="2" height="6" fill="#fff"/><rect x="1" y="3" width="6" height="2" fill="#fff"/></svg></span>
+      <span class="brand-word">DineshKumar<sup>®</sup></span>
+    </a>
+    <nav class="pills">
+      <a class="pill" href="#principles">About</a>
+      <a class="pill" href="#skills">Skills</a>
+      <a class="pill" href="#projects">Skill&nbsp;Hub</a>
+      <a class="pill pill-hot" href="#contact">Start&nbsp;a&nbsp;Project</a>
+      <span class="pct"><span class="n">0</span>%</span>
+    </nav>
+  </header>
+
+  <div class="debug" aria-hidden="true">→&nbsp;TOP:&nbsp;<span id="dbg-top">0</span>&nbsp;PX</div>
+  <div class="ver" aria-hidden="true">V_&nbsp;2026</div>
+
+  <div class="hero-mid">
+    <p class="kicker">Master Your Craft</p>
+    <p class="built">Built with obsession, <a href="#projects">not templates</a>.</p>
+  </div>
+
+  <h1 class="giant" aria-label="Dinesh Kumar">Dinesh&nbsp;Kumar&nbsp;<span>©</span></h1>
+
+  <div class="flanks" aria-hidden="true">
+    <span>FOR&nbsp;WEBSITES&nbsp;THAT&nbsp;FEEL&nbsp;ALIVE</span>
+    <span>FAST.&nbsp;SHARP.&nbsp;VERIFIED.</span>
+  </div>
 </section>
 
-<!-- 3. JOURNEY -->
-<section class="s-journey" id="journey">
+<!-- ══════════ 2 · INTERSTITIAL (pinned) ══════════ -->
+<section class="s-focus">
+  <div class="stages" aria-hidden="true">
+    <p>Focus</p>
+    <p>Keep&nbsp;Scrolling</p>
+    <p>The&nbsp;Craft&nbsp;Awakened</p>
+    <p>Take&nbsp;it…</p>
+    <p>And&nbsp;build…</p>
+  </div>
+</section>
+
+<!-- ══════════ 3 · JOURNEY CHAPTER (pinned) ══════════ -->
+<section class="s-journey">
   <canvas id="storm"></canvas>
-  <div class="journey-inner">
-    <p class="mono">&gt; the journey</p>
-    <h2 class="mega-sm" id="journeyTitle">Build with Intent, Not Templates.</h2>
-    <div class="dialogue">
-      <div class="dlg-line"><span class="dlg-name">DINESH</span><p class="dlg-text">Every project starts with understanding — your goals, your users.</p></div>
-      <div class="dlg-line"><span class="dlg-name">DINESH</span><p class="dlg-text">Then a plan: structure, motion, and content mapped before a line is built.</p></div>
-      <div class="dlg-line"><span class="dlg-name">DINESH</span><p class="dlg-text">Then the build: AI-assisted speed, human-verified craft.</p></div>
+  <div class="ch-title"><span id="scramble">THE JOURNEY</span></div>
+  <div class="dialogue">
+    <div class="dlg-portrait" aria-hidden="true"><span></span></div>
+    <div class="dlg-body">
+      <p class="dlg-name">DINESH</p>
+      <p class="dlg-line" id="dlg-line"></p>
+      <div class="dlg-progress"><span id="dlg-bar"></span></div>
     </div>
-    <p class="mono journey-outro">— to master the build is to master the detail.</p>
+    <button class="pill pill-ghost" id="dlg-skip" type="button">Skip&nbsp;↓</button>
   </div>
+  <p class="ch-outro">CRAFT&nbsp;WITH&nbsp;INTENT,&nbsp;NOT&nbsp;TEMPLATES.</p>
 </section>
 
-<!-- 4. PRINCIPLES -->
+<!-- ══════════ 4 · PRINCIPLES ══════════ -->
 <section class="s-principles" id="principles">
-  <p class="mono">&gt; principles</p>
-  <h2 class="mega-sm">Design with <em>Intent.</em></h2>
-  <p class="body">I'm Dinesh Kumar — MCA final-year at Loyola Academy, India. I build frontend websites with AI-assisted speed and human-verified craft.</p>
-  <ul class="prin-list">
-    <li><strong>Every pixel earns its place.</strong><span>Nothing decorative without a reason.</span></li>
-    <li><strong>Machine speed, human taste.</strong><span>AI workflows, verified live on phone and desktop.</span></li>
-    <li><strong>Motion with meaning.</strong><span>Scroll choreography that serves the story.</span></li>
-    <li><strong>Performance first.</strong><span>No bloat, no jank, native-friendly.</span></li>
-  </ul>
+  <div class="vcol" aria-hidden="true">DK·26</div>
+  <div class="wrap">
+    <p class="micro" data-reveal><span class="p">&gt;</span>PRINCIPLES</p>
+    <h2 class="h-xl" data-reveal>To master the craft…<br>is to master the details.</h2>
+    <div class="flowrow" data-reveal>
+      <span>FLOW</span><span class="dot">·</span><span>CONTROL</span>
+    </div>
+    <div class="letters" aria-hidden="true"><span>D</span><span>K</span><span>·</span><span>2</span><span>6</span></div>
+    <div class="about-grid">
+      <div class="about-copy" data-reveal>
+        <p>I'm Dinesh Kumar — frontend developer, MCA final-year at Loyola Academy. I build websites with AI-assisted workflows and verify every one live on phone and desktop before it ships.</p>
+        <p>If it doesn't feel alive, it isn't done.</p>
+      </div>
+      <div class="about-side" data-reveal>
+        <b>BASE</b><br>India<br><br>
+        <b>STATUS</b><br><span class="live">●</span> Open to freelance
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- 5. SKILLS -->
+<!-- ══════════ 5 · SKILLS ══════════ -->
 <section class="s-skills" id="skills">
-  <p class="mono">&gt; skills</p>
-  <h2 class="mega-sm">Tools I <em>wield daily.</em></h2>
-  <div class="skills-grid">
-    <div class="skill-card"><h3>React / Next.js</h3><p>Component architecture, server rendering.</p></div>
-    <div class="skill-card"><h3>GSAP / Motion</h3><p>Scroll choreography, micro-interactions.</p></div>
-    <div class="skill-card"><h3>Three.js</h3><p>WebGL scenes, 3D product moments.</p></div>
-    <div class="skill-card"><h3>AI Workflows</h3><p>Speed without losing the craft.</p></div>
+  <div class="wrap">
+    <p class="micro" data-reveal><span class="p">&gt;</span>TECHNIQUES</p>
+    <h2 class="h-lg" data-reveal>Six blades,<br>one standard.</h2>
+    <div class="tech-list">
+      <div class="tech" data-reveal><span class="arr">→</span><div><h3>React / Next.js</h3><p>Production frontend. Server components, routing, shipping.</p></div></div>
+      <div class="tech" data-reveal><span class="arr">→</span><div><h3>JavaScript / TypeScript</h3><p>The core language. Typed where it counts.</p></div></div>
+      <div class="tech" data-reveal><span class="arr">→</span><div><h3>Three.js / WebGL</h3><p>Real 3D on the web — scenes, not screenshots.</p></div></div>
+      <div class="tech" data-reveal><span class="arr">→</span><div><h3>GSAP / Motion</h3><p>Scroll choreography with intent, never decoration.</p></div></div>
+      <div class="tech" data-reveal><span class="arr">→</span><div><h3>AI-Assisted Build</h3><p>Speed without sloppiness. Verified, always.</p></div></div>
+      <div class="tech" data-reveal><span class="arr">→</span><div><h3>UI Systems</h3><p>Tokens, grids, rhythm — design that scales.</p></div></div>
+    </div>
+    <p class="cap" data-reveal>IT'S MINIMAL, EXPRESSIVE, AND PERFORMANCE-FIRST.</p>
   </div>
 </section>
 
-<!-- 6. WORK -->
-<section class="s-work" id="work">
-  <p class="mono">&gt; selected work</p>
-  <h2 class="mega-sm">Skill<em>Hub.</em></h2>
-  <div class="bento">
-    <a class="bento-card b-large" href="https://sreeka-interiors.vercel.app" target="_blank" rel="noopener"><span class="mono">01</span><h3>Sreeka Interiors</h3><p>Interior studio site — live.</p><span class="mono visit">visit ↗</span></a>
-    <div class="bento-card"><span class="mono">02</span><h3>IMPERIUM</h3><p>AI command center concept.</p></div>
-    <div class="bento-card"><span class="mono">03</span><h3>KeyMind</h3><p>Vault dashboard concept.</p></div>
-    <div class="bento-card"><span class="mono">04</span><h3>Auction Space</h3><p>Live auction platform concept.</p></div>
-    <div class="bento-card"><span class="mono">05</span><h3>Super</h3><p>AI-assisted dev portfolio.</p></div>
-    <div class="bento-card"><span class="mono">06</span><h3>Photography</h3><p>Visual diary — coming soon.</p></div>
+<!-- ══════════ 6 · SKILL HUB ══════════ -->
+<section class="s-hub" id="projects">
+  <div class="wrap">
+    <p class="micro" data-reveal><span class="p">&gt;</span>SKILL&nbsp;HUB</p>
+    <h2 class="h-lg" data-reveal>Selected work,<br>each one shipped.</h2>
+    <div class="bento">
+      <a class="cell c-big" href="https://sreeka-interiors.vercel.app" target="_blank" rel="noopener" data-reveal>
+        <span class="idx">01</span><h3>Sreeka Interiors</h3><p>Interior studio site · Live ↗</p>
+      </a>
+      <div class="cell" data-reveal><span class="idx">02</span><h3>IMPERIUM</h3><p>AI command center</p></div>
+      <div class="cell" data-reveal><span class="idx">03</span><h3>KeyMind</h3><p>Vault dashboard</p></div>
+      <div class="cell" data-reveal><span class="idx">04</span><h3>Auction Space</h3><p>Auction platform</p></div>
+      <div class="cell" data-reveal><span class="idx">05</span><h3>Super</h3><p>AI dev portfolio</p></div>
+      <div class="cell" data-reveal><span class="idx">06</span><h3>Photography</h3><p>Visual series · Soon</p></div>
+    </div>
   </div>
 </section>
 
-<!-- 7. WHO IT'S FOR -->
-<section class="s-for" id="for">
-  <p class="mono">&gt; who it's for</p>
-  <h2 class="mega-sm">Built for <em>you.</em></h2>
-  <div class="for-grid">
-    <div class="for-card"><h3>Startups</h3><p>Launch-page speed, product polish.</p></div>
-    <div class="for-card"><h3>Local Businesses</h3><p>A site that brings customers through the door.</p></div>
-    <div class="for-card"><h3>Creators</h3><p>Portfolios with presence.</p></div>
+<!-- ══════════ 7 · WHO I BUILD FOR ══════════ -->
+<section class="s-for">
+  <div class="wrap">
+    <p class="micro" data-reveal><span class="p">&gt;</span>WHO&nbsp;IT'S&nbsp;FOR</p>
+    <h2 class="h-lg" data-reveal>Direct, welcoming —<br>with respect for every client.</h2>
+    <div class="rows">
+      <div class="row" data-reveal><span class="rn">A</span><div><h3>Startups</h3><p>Launch-page speed, product polish. Prototype or ship — it feels right.</p></div><span class="arr">→</span></div>
+      <div class="row" data-reveal><span class="rn">B</span><div><h3>Local businesses</h3><p>Sites that bring customers. Get started fast, no wizardry needed.</p></div><span class="arr">→</span></div>
+      <div class="row" data-reveal><span class="rn">C</span><div><h3>Creators</h3><p>Portfolios with presence. Your work, composed your way.</p></div><span class="arr">→</span></div>
+    </div>
+    <p class="precision" data-reveal>FOR WHEN YOU NEED PRECISION. <a href="#contact">Start a project ↗</a></p>
   </div>
 </section>
 
-<!-- 8. CLARITY -->
-<section class="s-clarity" id="clarity">
-  <p class="mono">&gt; approach</p>
-  <div class="cycle-word" id="cycleWord">Clarity.</div>
-  <p class="body clarity-sub">Built to ship websites, not fight the browser.</p>
-  <div class="clarity-grid">
-    <div><span class="mono">(1)</span><p>Understand — your goals, your users.</p></div>
-    <div><span class="mono">(2)</span><p>Plan — structure, motion, content mapped.</p></div>
-    <div><span class="mono">(3)</span><p>Build — AI-assisted speed, human craft.</p></div>
-    <div><span class="mono">(4)</span><p>Refine &amp; Test — live on phone and desktop.</p></div>
+<!-- ══════════ 8 · APPROACH = clarity panel ══════════ -->
+<section class="s-clarity">
+  <div class="panel">
+    <div class="wrap">
+      <div class="pan-head">
+        <h2 class="h-panel" data-reveal>Build<br>With<br>Clarity</h2>
+        <p class="micro micro-dark" data-reveal>BUILT TO SHIP WEBSITES,<br>NOT FIGHT THE BROWSER</p>
+      </div>
+      <p class="cycler" data-reveal><span id="cycler-word">Websites</span></p>
+      <div class="cols">
+        <div data-reveal><p class="cn">(1)</p><p>Understand — your goal, audience and constraints before a line of code.</p></div>
+        <div data-reveal><p class="cn">(2)</p><p>Plan — structure, motion and content mapped. No mid-build surprises.</p></div>
+        <div data-reveal><p class="cn">(3)</p><p>Build — fast AI-assisted execution, engineering discipline underneath.</p></div>
+        <div data-reveal><p class="cn">(4)</p><p>Refine &amp; Test — verified live on phone and desktop. Ships upto the mark.</p></div>
+      </div>
+      <p class="plus" data-reveal>+ No templates, ever. + Captivating motion with ease. + <span class="p">→</span> Yours, end to end.</p>
+      <a class="bignav" href="#contact" data-reveal>START A PROJECT <span>↗</span></a>
+    </div>
   </div>
 </section>
 
-<!-- 9. FOOTER -->
+<!-- ══════════ 9 · FOOTER ══════════ -->
 <footer class="s-footer" id="contact">
-  <p class="mono">&gt; contact</p>
-  <h2 class="mega mirror">DineshKumar</h2>
-  <div class="footer-cta">
-    <a class="btn" href="https://wa.me/919398359538" target="_blank" rel="noopener">WhatsApp ↗</a>
-    <a class="btn" href="https://github.com/dineshmerugu06" target="_blank" rel="noopener">GitHub ↗</a>
-    <a class="btn" href="https://instagram.com/dinesh.kumar_i" target="_blank" rel="noopener">Instagram ↗</a>
+  <div class="wrap">
+    <div class="foot-pills" data-reveal>
+      <a class="pill" href="#projects">Skill&nbsp;Hub</a>
+      <a class="pill" href="https://wa.me/919398359538" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="pill" href="https://instagram.com/dinesh.kumar_i" target="_blank" rel="noopener">Instagram</a>
+      <a class="pill" href="https://github.com/dineshmerugu06" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <h2 class="mirror" aria-label="DineshKumar">DineshKumar</h2>
+    <div class="hexpanel" data-reveal>
+      <div class="hex-art" aria-hidden="true"><span class="ember-dot"></span></div>
+      <div class="hex-copy">
+        <p class="micro"><span class="p">&gt;</span>START&nbsp;A&nbsp;PROJECT</p>
+        <p class="hex-big">Let's build<br>something sharp.</p>
+        <a class="btn magnetic" href="https://wa.me/919398359538" target="_blank" rel="noopener"><span class="glare"></span><span class="lbl">WhatsApp ↗</span></a>
+      </div>
+    </div>
+    <div class="foot-cols">
+      <span>© DINESH&nbsp;KUMAR&nbsp;'26</span>
+      <span>FOR&nbsp;WEBSITES&nbsp;THAT&nbsp;FEEL&nbsp;ALIVE</span>
+      <span>FAST.&nbsp;SHARP.&nbsp;VERIFIED.</span>
+      <span><a href="tel:+919398359538">+91&nbsp;93983&nbsp;59538</a></span>
+    </div>
   </div>
-  <p class="mono foot-note">© 2026 Dinesh Kumar — frontend · ai-assisted</p>
 </footer>
 
-<script src="assets/js/vendor/gsap.min.js"></script>
-<script src="assets/js/vendor/ScrollTrigger.min.js"></script>
-<script src="assets/js/vendor/lenis.min.js"></script>
-<script type="importmap">{"imports":{"three":"./assets/js/vendor/three.module.js","three/addons/":"./assets/js/vendor/examples/jsm/"}}</script>
-<script type="module" src="assets/js/main.js"></script>
+<script src="./assets/js/vendor/gsap.min.js"></script>
+<script src="./assets/js/vendor/ScrollTrigger.min.js"></script>
+<script src="./assets/js/vendor/lenis.min.js"></script>
+<script src="./assets/js/main.js"></script>
+<script src="./assets/js/storm.js"></script>
+<script src="./assets/js/inkwash.js"></script>
+<script type="module" src="./assets/js/hero3d.js"></script>
 </body>
 </html>
