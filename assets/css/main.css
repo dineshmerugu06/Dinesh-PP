@@ -884,3 +884,8 @@ html.overdrive .od-toast{background:#35e0ff;color:#04222e}
   .rd-row{gap:.9rem;margin-top:1.4rem}
   .panel .mani-lines{font-size:2rem}
 }
+/* small phones: panels flow normally so nothing clips (wipe magic stays on desktop) */
+@media(max-width:900px){
+  .panel{position:relative;height:auto;min-height:100svh;padding:9vh 0}
+  .panel-in{transform:none!important}
+}
