@@ -18,8 +18,32 @@ ScrollTrigger.create({
 
 /* ---- hero entrance ---- */
 gsap.from('.hero-center .mega', { y: 80, opacity: 0, duration: 1.2, ease: 'power3.out', delay: 0.2 });
-gsap.from('.hero-kicker, .hero-sub', { y: 24, opacity: 0, duration: 1, stagger: 0.12, delay: 0.5 });
-gsap.from('.hero-nav, .hero-foot', { opacity: 0, duration: 1, delay: 0.8 });
+gsap.from('.hero-kicker, .hero-sub, .giant-name', { y: 24, opacity: 0, duration: 1, stagger: 0.12, delay: 0.5 });
+gsap.from('.hero-topbar, .hero-foot, .hero-logo, .hero-pills', { opacity: 0, duration: 1, delay: 0.8 });
+
+/* ---- debug readout ---- */
+const dbg = document.getElementById('debugReadout');
+if (dbg) addEventListener('mousemove', e => dbg.textContent = `x:${e.clientX} y:${e.clientY}`);
+
+/* ---- scramble title ---- */
+function scramble(el) {
+  const chars = '!<>-_\\/[]{}—=+*^?#';
+  const orig = el.dataset.text || el.textContent;
+  el.dataset.text = orig;
+  let frame = 0;
+  const total = 28;
+  const iv = setInterval(() => {
+    frame++;
+    el.textContent = orig.split('').map((c, i) => {
+      if (c === ' ' || c === '\n') return c;
+      return (i / orig.length) < (frame / total) ? c : chars[Math.floor(Math.random() * chars.length)];
+    }).join('');
+    if (frame >= total) { clearInterval(iv); el.textContent = orig; }
+  }, 34);
+}
+document.querySelectorAll('.journey-inner .mega-sm').forEach(el => {
+  ScrollTrigger.create({ trigger: el, start: 'top 75%', once: true, onEnter: () => scramble(el) });
+});
 
 /* ---- hero dragon ---- */
 function makeScene(canvas, opts = {}) {
