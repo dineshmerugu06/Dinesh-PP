@@ -786,3 +786,101 @@ html.overdrive .od-toast{background:#35e0ff;color:#04222e}
   .wcard{flex-basis:82vw}
   .play-hint{white-space:normal;text-align:center;width:90%}
 }
+
+/* ══════════ sticky-stack panels · 10 unique worlds ══════════ */
+.stack{position:relative}
+.panel{position:sticky;top:0;height:100svh;min-height:560px;overflow:hidden;display:flex;align-items:center}
+.panel-in{width:100%;position:relative;z-index:2}
+.p-h{font-size:clamp(2.1rem,4.6vw,3.9rem);font-weight:700;letter-spacing:-.03em;line-height:1.02;margin:1em 0 0;color:var(--white)}
+.p-h-dark{color:#141412}
+.ch-dark{color:#4a1512}.ch-dark .p{color:#0d0d0f}
+.p-process .ch-dark{color:#6a6256}.p-process .ch-dark .p{color:var(--red)}
+.p-contact .ch-dark{color:#6a5f4c}.p-contact .ch-dark .p{color:var(--red)}
+.p-creed{background:#0b0b0c}
+.p-missions{background:#d9381e}
+.p-missions .p-h{color:#fff}
+.p-arsenal{background:#1a1410}
+.p-process{background:#f4f1ea}
+.p-work{background:#0a1428}
+.p-principles{background:#0a0f22;overflow:hidden}
+.p-road{background:#0e1512}
+.p-status{background:#0c0c0e;background-image:radial-gradient(rgba(255,255,255,.055) 1px,transparent 1px);background-size:34px 34px}
+.p-play{background:#060608}
+.p-contact{background:#ece5d3}
+
+/* missions on red */
+.ms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,2vw,1.8rem);margin-top:2.2rem}
+.ms-card{background:#0d0d0f;border-radius:18px;padding:1.7rem;display:flex;flex-direction:column;transition:transform .35s}
+.ms-card:hover{transform:translateY(-6px)}
+.ms-card h3{font-size:1.5rem;margin:.8rem 0 .5rem;color:#fff}
+.ms-card p{color:#c9c2b8;line-height:1.55;margin:0 0 1.4rem;font-size:.92rem;flex:1}
+
+/* work grid */
+.wk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(.9rem,1.8vw,1.6rem);margin-top:2rem}
+.wk{border:1px solid rgba(255,255,255,.1);border-radius:14px;overflow:hidden;background:rgba(255,255,255,.03);transition:transform .35s,border-color .35s}
+.wk:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.3)}
+.wk .scover{min-height:120px}
+.wk .scover span{font-size:2.2rem}
+.wk-m{padding:1rem 1.1rem 1.1rem}
+.wk-m h3{font-size:1.05rem;margin:0 0 .3rem;letter-spacing:-.01em}
+.wk-m span,.wk-m a{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:#8fa0b8;text-transform:uppercase}
+.wk-m a{color:#ff8a5c;text-decoration:none}
+.wk-m a:hover{text-decoration:underline}
+
+/* road row */
+.rd-row{list-style:none;margin:2.4rem 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1rem,2.4vw,2rem)}
+.rd-row li{border-top:2px solid #2a3a2e;padding-top:1.2rem}
+.rd-row .tl-year{font-family:var(--mono);font-size:.72rem;letter-spacing:.24em;color:var(--red)}
+.rd-row h3{font-size:1.25rem;margin:.7rem 0 .4rem}
+.rd-row p{color:#a9b8ac;line-height:1.55;margin:0;font-size:.9rem}
+
+/* playground fill */
+.play-fill{position:absolute;inset:0;z-index:1}
+#playCanvas{position:absolute;inset:0;width:100%;height:100%}
+.play-in{text-align:left}
+.play-hint{margin-top:1.6rem;color:#6f6a5c}
+
+/* contact on bone */
+.p-contact .cta-giant a{color:transparent;-webkit-text-stroke:2px #141412}
+.p-contact .cta-giant a:hover{color:var(--red);-webkit-text-stroke:2px var(--red)}
+.p-contact .crow{color:#141412;border-color:#d8cfb8}
+.p-contact .crow:hover{background:#e2d9c2}
+.p-contact .endbar{border-color:#d8cfb8;color:#6a5f4c}
+.p-contact .endbar .to-top{color:#6a5f4c}
+
+/* tighten reused bits for 100vh */
+.p-arsenal .arsenal-field{height:34vh;min-height:240px;margin-top:1.8rem}
+.p-principles .pr-grid{grid-template-columns:repeat(4,1fr);margin-top:2rem}
+.p-principles .pr-card{padding:1.6rem}
+.p-principles .pr-card h3{font-size:1.15rem}
+.p-principles .pr-card p{font-size:.88rem}
+.p-status .status-card{margin-top:1.6rem;padding:2rem}
+.p-process .proc-track{margin-top:2.6rem}
+.panel .mani-lines{font-size:clamp(2.4rem,6vw,5.4rem)}
+
+@media(max-width:900px){
+  .ms-grid{grid-template-columns:1fr;gap:.9rem;margin-top:1.6rem}
+  .ms-card{padding:1.3rem}.ms-card p{margin-bottom:1rem}
+  .wk-grid{grid-template-columns:repeat(2,1fr);gap:.8rem}
+  .wk .scover{min-height:88px}.wk .scover span{font-size:1.6rem}
+  .wk-m h3{font-size:.92rem}
+  .rd-row{grid-template-columns:1fr 1fr;gap:1.2rem}
+  .p-principles .pr-grid{grid-template-columns:1fr 1fr;gap:.9rem}
+  .p-principles .pr-card{padding:1.2rem}
+  .p-arsenal .arsenal-field{height:36vh}
+  .panel{min-height:620px}
+}
+.p-process .pstep h3{color:#141412}
+.p-process .pstep p{color:#5a564e}
+.p-process .proc-rail{background:#d8d2c2}
+@media(max-height:760px) and (max-width:900px){
+  .p-h{font-size:1.8rem;margin-top:.7em}
+  .ms-card{padding:1rem}.ms-card h3{font-size:1.15rem;margin:.5rem 0 .35rem}
+  .ms-card p{font-size:.8rem;margin-bottom:.8rem}
+  .ms-go{padding:.8em 1.5em;font-size:.75rem}
+  .ms-grid{margin-top:1.2rem;gap:.7rem}
+  .wk .scover{min-height:64px}.wk .scover span{font-size:1.3rem}
+  .wk-m{padding:.7rem}.wk-m h3{font-size:.82rem}
+  .rd-row{gap:.9rem;margin-top:1.4rem}
+  .panel .mani-lines{font-size:2rem}
+}

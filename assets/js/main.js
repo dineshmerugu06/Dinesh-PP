@@ -356,25 +356,31 @@
 
 
 
-/* ══════════ chapters 01–09 · portfolio-study rebuild ══════════ */
+
+/* ══════════ sticky-stack panels · 10 unique worlds ══════════ */
 (function () {
   gsap.registerPlugin(ScrollTrigger);
   const lerp = (a, b, t) => a + (b - a) * t;
 
-  /* ---------- chapter rail scroll-spy ---------- */
+  /* panel inner drift — content floats as the next world wipes over */
+  document.querySelectorAll('.panel').forEach((panel) => {
+    const inner = panel.querySelector('.panel-in');
+    if (!inner) return;
+    gsap.fromTo(inner, { y: 70 }, {
+      y: -70, ease: 'none',
+      scrollTrigger: { trigger: panel, start: 'top bottom', end: 'bottom top', scrub: true }
+    });
+  });
+
+  /* chapter rail scroll-spy */
   const chLinks = Array.from(document.querySelectorAll('.chapters a'));
-  const chIds = chLinks.map((a) => a.dataset.ch);
   if (chLinks.length) {
-    chIds.forEach((id) => {
+    chLinks.map((a) => a.dataset.ch).forEach((id) => {
       const sec = document.getElementById(id);
       if (!sec) return;
       ScrollTrigger.create({
         trigger: sec, start: 'top center', end: 'bottom center',
-        onToggle: (self) => {
-          if (self.isActive) {
-            chLinks.forEach((a) => a.classList.toggle('on', a.dataset.ch === id));
-          }
-        }
+        onToggle: (self) => { if (self.isActive) chLinks.forEach((a) => a.classList.toggle('on', a.dataset.ch === id)); }
       });
     });
     chLinks.forEach((a) => a.addEventListener('click', (e) => {
@@ -385,7 +391,7 @@
     }));
   }
 
-  /* ---------- 01 · MANIFESTO: mask-wipe ---------- */
+  /* creed mask-wipe */
   document.querySelectorAll('.mline > span').forEach((s, i) => {
     gsap.fromTo(s, { yPercent: 115 }, {
       yPercent: 0, duration: 1.1, ease: 'power4.out', delay: i * 0.12,
@@ -393,17 +399,16 @@
     });
   });
 
-  /* ---------- 02 · MISSIONS ---------- */
+  /* missions */
   document.querySelectorAll('.ms-card').forEach((card) => {
     const btn = card.querySelector('.ms-go');
     if (!btn) return;
     btn.addEventListener('click', () => {
-      const msg = card.dataset.wa || 'Hi Dinesh — I have a mission.';
-      window.open('https://wa.me/919398359538?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+      window.open('https://wa.me/919398359538?text=' + encodeURIComponent(card.dataset.wa || 'Hi Dinesh — I have a mission.'), '_blank', 'noopener');
     });
   });
 
-  /* ---------- 03 · ARSENAL: dodging ember tags ---------- */
+  /* arsenal dodging tags */
   const field = document.getElementById('arsenalField');
   if (field) {
     const tags = Array.from(field.querySelectorAll('.tag'));
@@ -445,7 +450,7 @@
     })(0);
   }
 
-  /* ---------- 04 · PROCESS: drawing line ---------- */
+  /* process draw line */
   const procFill = document.getElementById('procFill');
   const psteps = document.querySelectorAll('.pstep');
   const procTrack = document.querySelector('.proc-track');
@@ -460,25 +465,7 @@
     });
   }
 
-  /* ---------- 05 · WORK: pinned horizontal gallery ---------- */
-  const workSec = document.getElementById('work'), workTrack = document.getElementById('workTrack');
-  const workNow = document.getElementById('workNow');
-  if (workSec && workTrack) {
-    const cards = workTrack.querySelectorAll('.wcard');
-    const dist = () => Math.max(0, workTrack.scrollWidth - window.innerWidth + parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--gap')) * 2);
-    gsap.to(workTrack, {
-      x: () => -dist(), ease: 'none',
-      scrollTrigger: {
-        trigger: workSec, start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 1,
-        invalidateOnRefresh: true, anticipatePin: 1,
-        onUpdate: (self) => {
-          if (workNow) workNow.textContent = String(Math.min(cards.length, Math.floor(self.progress * cards.length) + 1)).padStart(2, '0');
-        }
-      }
-    });
-  }
-
-  /* ---------- 06 · PRINCIPLES: cursor tilt ---------- */
+  /* principles tilt */
   document.querySelectorAll('.pr-card').forEach((card) => {
     card.addEventListener('pointermove', (e) => {
       const r = card.getBoundingClientRect();
@@ -488,22 +475,7 @@
     card.addEventListener('pointerleave', () => gsap.to(card, { rotateX: 0, rotateY: 0, duration: .8, ease: 'elastic.out(1,.5)' }));
   });
 
-  /* ---------- 07 · ROAD: traveling dot ---------- */
-  const tlFill = document.getElementById('tlFill'), tlDot = document.getElementById('tlDot');
-  const tlItems = document.querySelectorAll('.tl-item'), tlBox = document.querySelector('.tl');
-  if (tlFill && tlBox) {
-    ScrollTrigger.create({
-      trigger: tlBox, start: 'top 70%', end: 'bottom 60%', scrub: 0.6,
-      onUpdate: (self) => {
-        tlFill.style.transform = 'scaleY(' + self.progress.toFixed(3) + ')';
-        if (tlDot) tlDot.style.top = (self.progress * 100).toFixed(2) + '%';
-        const lit = Math.round(self.progress * tlItems.length);
-        tlItems.forEach((it, i) => it.classList.toggle('lit', i < lit));
-      }
-    });
-  }
-
-  /* ---------- 08 · STATUS: live clock ---------- */
+  /* status clock */
   const stClock = document.getElementById('stClock');
   if (stClock) {
     const tick = () => {
@@ -512,21 +484,21 @@
     tick(); setInterval(tick, 1000);
   }
 
-  /* ---------- 09 · PLAYGROUND: ember particles ---------- */
+  /* playground embers (full panel) */
   const pc = document.getElementById('playCanvas');
   if (pc) {
     const ctx = pc.getContext('2d');
-    const pfield = document.getElementById('playField');
+    const panel = document.getElementById('playground');
     let W, H, pts = [], running = true, mx = -9999, my = -9999;
     const size = () => { W = pc.width = pc.offsetWidth; H = pc.height = pc.offsetHeight; seed(); };
     function seed() {
       pts = [];
-      const n = Math.min(160, Math.floor(W * H / 12000));
+      const n = Math.min(170, Math.floor(W * H / 11000));
       for (let i = 0; i < n; i++) pts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .4, vy: -Math.random() * .5 - .1, r: Math.random() * 2.4 + .8, ph: Math.random() * 6.28 });
     }
     size(); window.addEventListener('resize', size);
-    pfield.addEventListener('pointermove', (e) => { const r = pc.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; });
-    pfield.addEventListener('pointerleave', () => { mx = -9999; my = -9999; });
+    panel.addEventListener('pointermove', (e) => { const r = pc.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; });
+    panel.addEventListener('pointerleave', () => { mx = -9999; my = -9999; });
     new IntersectionObserver((e) => { running = e[0].isIntersecting; }).observe(pc);
     (function draw(t) {
       requestAnimationFrame(draw);
@@ -548,7 +520,7 @@
     })(0);
   }
 
-  /* ---------- konami easter egg: OVERDRIVE ---------- */
+  /* konami overdrive */
   const seq = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
   let ki = 0;
   const toast = document.getElementById('odToast');
@@ -566,10 +538,10 @@
     }
   });
 
-  /* ---------- cursor hover for new targets ---------- */
+  /* cursor hover */
   const ring = document.querySelector('.cursor-ring');
   if (ring) {
-    document.querySelectorAll('.ms-go,.chapters a,.svisit,.st-cta').forEach((el) => {
+    document.querySelectorAll('.ms-go,.chapters a,.st-cta,.crow,.cta-giant a,.wk a').forEach((el) => {
       el.addEventListener('mouseenter', () => ring.classList.add('is-hover'));
       el.addEventListener('mouseleave', () => ring.classList.remove('is-hover'));
     });
