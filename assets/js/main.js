@@ -83,23 +83,7 @@ new GLTFLoader().load('assets/img/dragon.glb', g => {
   });
 });
 
-/* ---- minidragon turntable ---- */
-const miniCanvas = document.getElementById('minidragon');
-const mini = makeScene(miniCanvas);
-mini.cam.position.set(0, 0.8, 9); mini.cam.lookAt(0, 0.2, 0);
-let miniModel = null, miniMixer = null, miniVisible = true;
-new GLTFLoader().load('assets/img/dragon.glb', g => {
-  miniModel = g.scene;
-  const box = new THREE.Box3().setFromObject(miniModel);
-  const c = box.getCenter(new THREE.Vector3()), s = box.getSize(new THREE.Vector3());
-  miniModel.position.sub(c);
-  miniModel.scale.multiplyScalar(5.5 / Math.max(s.x, s.y, s.z));
-  mini.scene.add(miniModel);
-  if (g.animations.length) { miniMixer = new THREE.AnimationMixer(miniModel); miniMixer.clipAction(g.animations[0]).play(); }
-});
-new IntersectionObserver(e => miniVisible = e[0].isIntersecting).observe(miniCanvas);
-
-/* ---- render loop ---- */
+/* ---- render loop (hero only) ---- */
 const clock = new THREE.Clock();
 function loop() {
   requestAnimationFrame(loop);
@@ -107,12 +91,6 @@ function loop() {
   fitCanvas(heroCanvas, hero.renderer, hero.cam);
   if (heroMixer) heroMixer.update(dt);
   hero.renderer.render(hero.scene, hero.cam);
-  if (miniModel && miniVisible) {
-    fitCanvas(miniCanvas, mini.renderer, mini.cam);
-    miniModel.rotation.y += dt * 0.5;
-    if (miniMixer) miniMixer.update(dt);
-    mini.renderer.render(mini.scene, mini.cam);
-  }
 }
 loop();
 
@@ -163,43 +141,10 @@ gsap.utils.toArray('.dlg-line').forEach((el, i) => {
   });
 });
 
-/* ---- principles dragon parallax ---- */
-gsap.to('#prinDragon', {
-  y: -90, ease: 'none',
-  scrollTrigger: { trigger: '.s-principles', start: 'top bottom', end: 'bottom top', scrub: 1 }
-});
-
 /* ---- section reveals ---- */
-gsap.utils.toArray('.mega-sm, .bento-card, .card, .clarity-grid > div').forEach(el => {
+gsap.utils.toArray('.mega-sm, .bento-card, .tech-item, .for-card, .clarity-grid > div').forEach(el => {
   gsap.from(el, {
     y: 50, opacity: 0, duration: 0.9, ease: 'power2.out',
     scrollTrigger: { trigger: el, start: 'top 88%' }
   });
 });
-
-/* ---- orbit ---- */
-const orbitData = [
-  { t: 'Startups', d: 'Launch-page speed, product polish. Prototype or ship — it feels right.' },
-  { t: 'Local Businesses', d: 'A site that brings customers through the door. Clear, fast, trustworthy.' },
-  { t: 'Creators', d: 'Portfolios with presence. Your work, framed the way it deserves.' }
-];
-const orbitTitle = document.getElementById('orbitTitle');
-const orbitText = document.getElementById('orbitText');
-const orbitBtns = document.querySelectorAll('.orbit-btn');
-let orbitI = 0, orbitTimer = null;
-function orbitSet(i) {
-  orbitI = i;
-  gsap.to([orbitTitle, orbitText], {
-    opacity: 0, y: 8, duration: 0.25, onComplete: () => {
-      orbitTitle.textContent = orbitData[i].t;
-      orbitText.textContent = orbitData[i].d;
-      gsap.to([orbitTitle, orbitText], { opacity: 1, y: 0, duration: 0.4 });
-    }
-  });
-  orbitBtns.forEach((b, j) => b.classList.toggle('active', j === i));
-}
-function orbitAuto() { orbitTimer = setInterval(() => orbitSet((orbitI + 1) % 3), 4200); }
-orbitBtns.forEach(b => b.addEventListener('click', () => {
-  clearInterval(orbitTimer); orbitSet(+b.dataset.i); orbitAuto();
-}));
-orbitSet(0); orbitAuto();
