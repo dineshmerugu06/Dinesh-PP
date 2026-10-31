@@ -87,8 +87,9 @@ a.bento-card:hover{transform:translateY(-4px);border-color:var(--red)}
 .s-clarity{background:var(--paper);color:var(--ink);border-radius:2rem 2rem 0 0}
 .s-clarity::before{content:"";position:absolute;top:-150px;left:0;right:0;height:150px;background:linear-gradient(180deg,transparent,var(--pink));pointer-events:none}
 .s-clarity .mono{color:#777}
-.s-clarity .mega{color:var(--ink)}
+.s-clarity .mega-sm{color:var(--ink)}
 .s-clarity .body{color:#444}
+.cycle-word{font-size:clamp(4rem,14vw,12rem);font-weight:700;letter-spacing:-.03em;line-height:.9;color:var(--ink);margin:.3em 0;min-height:1em}
 .clarity-sub{margin:1rem 0 3rem}
 .clarity-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:2rem}
 .clarity-grid p{margin-top:.5rem;color:#333;line-height:1.5}

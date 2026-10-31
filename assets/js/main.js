@@ -76,10 +76,20 @@ new GLTFLoader().load('assets/img/dragon.glb', g => {
   heroModel.position.y -= 0.6;
   hero.scene.add(heroModel);
   if (g.animations.length) { heroMixer = new THREE.AnimationMixer(heroModel); heroMixer.clipAction(g.animations[0]).play(); heroMixer.timeScale = 0.5; }
-  // scroll-linked spin
+  // scroll-linked spin + mouse parallax (interactive 3D, not static)
+  let mx = 0, my = 0, tx = 0, ty = 0;
+  addEventListener('mousemove', e => {
+    tx = (e.clientX / innerWidth - 0.5);
+    ty = (e.clientY / innerHeight - 0.5);
+  });
+  heroModel.userData.tick = (dt) => {
+    mx += (tx - mx) * 0.04; my += (ty - my) * 0.04;
+    heroModel.rotation.x = my * 0.35;
+    heroModel.position.x = mx * 0.8;
+  };
   ScrollTrigger.create({
     trigger: '.s-hero', start: 'top top', end: 'bottom top', scrub: 1,
-    onUpdate: s => { if (heroModel) heroModel.rotation.y = s.progress * Math.PI * 1.2 - 0.4; }
+    onUpdate: s => { if (heroModel) heroModel.rotation.y = s.progress * Math.PI * 1.2 - 0.4 + mx * 0.5; }
   });
 });
 
@@ -90,6 +100,7 @@ function loop() {
   const dt = Math.min(clock.getDelta(), 0.05);
   fitCanvas(heroCanvas, hero.renderer, hero.cam);
   if (heroMixer) heroMixer.update(dt);
+  if (heroModel && heroModel.userData.tick) heroModel.userData.tick(dt);
   hero.renderer.render(hero.scene, hero.cam);
 }
 loop();
@@ -140,6 +151,20 @@ gsap.utils.toArray('.dlg-line').forEach((el, i) => {
     scrollTrigger: { trigger: el, start: 'top 85%' }
   });
 });
+
+/* ---- cycling word ---- */
+const cycleEl = document.getElementById('cycleWord');
+if (cycleEl) {
+  const words = ['Clarity.', 'Focus.', 'Craft.', 'Intent.', 'Ship.'];
+  let wi = 0;
+  setInterval(() => {
+    wi = (wi + 1) % words.length;
+    gsap.to(cycleEl, { opacity: 0, y: -18, duration: 0.3, onComplete: () => {
+      cycleEl.textContent = words[wi];
+      gsap.to(cycleEl, { opacity: 1, y: 0, duration: 0.4 });
+    }});
+  }, 2600);
+}
 
 /* ---- section reveals ---- */
 gsap.utils.toArray('.mega-sm, .bento-card, .tech-item, .for-card, .clarity-grid > div').forEach(el => {
