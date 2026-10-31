@@ -89,158 +89,198 @@
   </div>
 </section>
 
-<!-- ══════════ 5 · SELECTED WORK — horizontal filmstrip ══════════ -->
-<section class="s-work" id="work">
+<!-- ══════════ 5 · CRAFT — material-first (from Zeyra Glow) ══════════ -->
+<section class="s-craft" id="craft">
+  <canvas class="craft-sparkles" id="craftSparkles" aria-hidden="true"></canvas>
+  <div class="craft-glow g1" data-speed="0.12" aria-hidden="true"></div>
+  <div class="craft-glow g2" data-speed="-0.08" aria-hidden="true"></div>
+  <div class="wrap craft-inner">
+    <p class="micro" data-reveal><span class="p">&gt;</span>THE&nbsp;CRAFT</p>
+    <h2 class="craft-word" data-reveal>craft</h2>
+    <p class="craft-state" data-reveal>Texture is the message.</p>
+    <p class="craft-sub" data-reveal>Interfaces you can feel — every surface considered, every detail tactile, nothing flat where it should breathe.</p>
+  </div>
+</section>
+
+<!-- ══════════ 6 · PATHS — branching start (from Réno Énergie) ══════════ -->
+<section class="s-paths" id="paths">
   <div class="wrap">
-    <p class="micro" data-reveal><span class="p">&gt;</span>SELECTED&nbsp;WORK</p>
-    <div class="work-head" data-reveal>
-      <h2 class="h-lg work-title">Six builds.<br>Zero templates.</h2>
-      <div class="work-nav">
-        <button class="wbtn magnetic" id="workPrev" type="button" aria-label="Previous project">&#8592;</button>
-        <button class="wbtn magnetic" id="workNext" type="button" aria-label="Next project">&#8594;</button>
+    <p class="micro micro-dark" data-reveal><span class="p">&gt;</span>TWO&nbsp;WAYS&nbsp;TO&nbsp;START</p>
+    <h2 class="h-lg paths-title" data-reveal>Pick your path.</h2>
+    <div class="path-cards" data-reveal>
+      <button class="path-card" id="pathA" type="button" aria-expanded="false">
+        <span class="path-kicker">PATH A</span>
+        <span class="path-name">I know what I want</span>
+        <span class="path-hint">Jump straight to the build &#8594;</span>
+      </button>
+      <button class="path-card alt" id="pathB" type="button" aria-expanded="false">
+        <span class="path-kicker">PATH B</span>
+        <span class="path-name">Guide me</span>
+        <span class="path-hint">Three steps, zero confusion &#8594;</span>
+      </button>
+    </div>
+    <div class="path-panel" id="panelA" hidden>
+      <p class="panel-label">What are we building?</p>
+      <div class="panel-chips">
+        <a class="pchip magnetic" href="https://wa.me/919398359538?text=Hi%20Dinesh%20%E2%80%94%20I%20want%20a%20website." target="_blank" rel="noopener">A website &#8599;</a>
+        <a class="pchip magnetic" href="https://wa.me/919398359538?text=Hi%20Dinesh%20%E2%80%94%20I%20want%20an%20AI%20agent." target="_blank" rel="noopener">An AI agent &#8599;</a>
+        <a class="pchip magnetic" href="https://wa.me/919398359538?text=Hi%20Dinesh%20%E2%80%94%20I%20want%20a%20redesign." target="_blank" rel="noopener">A redesign &#8599;</a>
+      </div>
+    </div>
+    <div class="path-panel" id="panelB" hidden>
+      <ol class="guide-steps">
+        <li><b>01</b><span>Tell me the goal — one message on WhatsApp is enough.</span></li>
+        <li><b>02</b><span>I study references and show you a sample before any code.</span></li>
+        <li><b>03</b><span>We ship it live — verified on phone and desktop.</span></li>
+      </ol>
+      <a class="pchip solid magnetic" href="https://wa.me/919398359538?text=Hi%20Dinesh%20%E2%80%94%20guide%20me." target="_blank" rel="noopener">Start step 01 &#8599;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 7 · ORACLE — conversational wizard (from Miljøfyrtårn) ══════════ -->
+<section class="s-oracle" id="oracle">
+  <div class="aurora a1" aria-hidden="true"></div>
+  <div class="aurora a2" aria-hidden="true"></div>
+  <div class="wrap oracle-inner">
+    <p class="micro" data-reveal><span class="p">&gt;</span>THE&nbsp;ORACLE</p>
+    <h2 class="h-lg oracle-title" data-reveal>Ask for what<br>you need.</h2>
+    <div class="glass" data-reveal>
+      <label class="glass-label" for="oracleInput">Describe it in your own words</label>
+      <div class="glass-row">
+        <input class="glass-input" id="oracleInput" type="text" placeholder="e.g. a portfolio site for my work…" autocomplete="off" maxlength="80">
+        <button class="glass-go magnetic" id="oracleGo" type="button" aria-label="Ask">&#8594;</button>
+      </div>
+      <div class="glass-try">
+        <span>try:</span>
+        <button type="button" data-q="a portfolio website">portfolio</button>
+        <button type="button" data-q="an AI chatbot for my business">AI chatbot</button>
+        <button type="button" data-q="an online store">online store</button>
+      </div>
+      <div class="oracle-out" id="oracleOut" aria-live="polite">
+        <p class="oracle-idle">The oracle is listening…</p>
       </div>
     </div>
   </div>
-  <div class="film" id="film" tabindex="0" aria-label="Selected work gallery. Use left and right arrow keys to browse.">
-    <article class="frame" data-reveal>
-      <span class="frame-no">01</span>
-      <h3>IMPERIUM</h3>
-      <p class="frame-tag">AI AGENT SYSTEM</p>
-      <p class="frame-desc">A multi-agent system — job discovery, ATS resume generation, and autonomous workflows, orchestrated end to end.</p>
-    </article>
-    <article class="frame" data-reveal>
-      <span class="frame-no">02</span>
-      <h3>KeyMind</h3>
-      <p class="frame-tag">AI PRODUCT</p>
-      <p class="frame-desc">An AI-driven product build — from prompt design to a working interface people can actually use.</p>
-    </article>
-    <article class="frame" data-reveal>
-      <span class="frame-no">03</span>
-      <h3>Auction Space</h3>
-      <p class="frame-tag">WEB APP</p>
-      <p class="frame-desc">A live auction experience — real-time bidding flow, sharp UI, zero clutter.</p>
-    </article>
-    <article class="frame" data-reveal>
-      <span class="frame-no">04</span>
-      <h3>Super</h3>
-      <p class="frame-tag">WEB EXPERIENCE</p>
-      <p class="frame-desc">A high-energy web build — motion-led, fast, and unmistakably mine.</p>
-    </article>
-    <article class="frame" data-reveal>
-      <span class="frame-no">05</span>
-      <h3>Sreeka Interiors</h3>
-      <p class="frame-tag">BUSINESS SITE &middot; LIVE</p>
-      <p class="frame-desc">A Hyderabad interior studio's site — calm, premium, and built to convert visitors into calls.</p>
-      <a class="frame-link magnetic" href="https://sreeka-interiors.vercel.app" target="_blank" rel="noopener">Visit live &#8599;</a>
-    </article>
-    <article class="frame" data-reveal>
-      <span class="frame-no">06</span>
-      <h3>Photography</h3>
-      <p class="frame-tag">VISUAL JOURNAL</p>
-      <p class="frame-desc">The eye behind the code — frames, light, and moments worth keeping.</p>
-    </article>
-  </div>
-  <div class="wrap"><p class="micro film-hint"><span class="p">&gt;</span>SCROLL&nbsp;SIDEWAYS&nbsp;&middot;&nbsp;&#8592;&nbsp;&#8594;&nbsp;KEYS&nbsp;WORK&nbsp;TOO</p></div>
 </section>
 
-<!-- ══════════ 6 · ARSENAL — tabbed capabilities ══════════ -->
-<section class="s-arsenal" id="arsenal">
+<!-- ══════════ 8 · PHILOSOPHY — cinematic serif (from NAKAGAWA) ══════════ -->
+<section class="s-philo" id="philosophy">
+  <div class="philo-bg" aria-hidden="true"></div>
+  <div class="philo-grain" aria-hidden="true"></div>
+  <div class="wrap philo-inner">
+    <p class="micro" data-reveal><span class="p">&gt;</span>PHILOSOPHY</p>
+    <p class="philo-giant" data-reveal>Clarity is<br>the <em>luxury</em>.</p>
+    <p class="philo-body" data-reveal>No noise. No templates. No borrowed personality —<br>just the essential, done beautifully.</p>
+  </div>
+</section>
+
+<!-- ══════════ 9 · LAB — live playground (from Poulo) ══════════ -->
+<section class="s-lab" id="lab">
   <div class="wrap">
-    <p class="micro" data-reveal><span class="p">&gt;</span>THE&nbsp;ARSENAL</p>
-    <h2 class="h-lg" data-reveal>Tools I reach for<br>when it matters.</h2>
-    <div class="tabs" data-reveal role="tablist" aria-label="Capabilities">
-      <button class="tab is-on" data-tab="fe" role="tab" aria-selected="true" type="button">FRONTEND</button>
-      <button class="tab" data-tab="be" role="tab" aria-selected="false" type="button">BACKEND</button>
-      <button class="tab" data-tab="ai" role="tab" aria-selected="false" type="button">AI &amp; AUTOMATION</button>
-    </div>
-    <div class="panels" data-reveal>
-      <ul class="panel is-on" data-panel="fe" role="tabpanel">
-        <li><b>React</b><span>interfaces that feel alive</span></li>
-        <li><b>TypeScript</b><span>typed, predictable, fast to change</span></li>
-        <li><b>GSAP + Lenis</b><span>choreographed motion, buttery scroll</span></li>
-        <li><b>Three.js</b><span>cinematic 3D — only where it earns its place</span></li>
-      </ul>
-      <ul class="panel" data-panel="be" role="tabpanel">
-        <li><b>Python + FastAPI</b><span>APIs that stay out of the way</span></li>
-        <li><b>Node.js</b><span>real-time flows and tooling</span></li>
-        <li><b>PostgreSQL + Supabase</b><span>data with a backbone</span></li>
-        <li><b>Java / Spring Boot</b><span>enterprise-grade when it counts</span></li>
-      </ul>
-      <ul class="panel" data-panel="ai" role="tabpanel">
-        <li><b>LLM applications</b><span>prompt design to production</span></li>
-        <li><b>AI agents</b><span>multi-agent systems that do the work</span></li>
-        <li><b>RAG pipelines</b><span>grounded answers, not hallucinations</span></li>
-        <li><b>Selenium automation</b><span>browsers doing the boring parts</span></li>
-      </ul>
+    <p class="micro micro-dark" data-reveal><span class="p">&gt;</span>THE&nbsp;LAB</p>
+    <h2 class="h-lg lab-title" data-reveal>Don't take my word.<br>Try it live.</h2>
+    <div class="lab-grid">
+      <div class="lab-cell" data-reveal>
+        <p class="lab-tag">01 · MAGNETIC</p>
+        <button class="lab-mag magnetic" type="button">Pull me</button>
+      </div>
+      <div class="lab-cell" data-reveal>
+        <p class="lab-tag">02 · SCRAMBLE</p>
+        <p class="lab-scramble" id="labScramble">HOVER TO SCRAMBLE</p>
+      </div>
+      <div class="lab-cell" data-reveal>
+        <p class="lab-tag">03 · MARQUEE</p>
+        <div class="lab-marquee"><span id="labMq">DESIGN · MOTION · CODE · SHIP · DESIGN · MOTION · CODE · SHIP ·&nbsp;</span></div>
+        <input class="lab-range" id="labRange" type="range" min="1" max="10" value="4" aria-label="Marquee speed">
+      </div>
+      <div class="lab-cell" data-reveal>
+        <p class="lab-tag">04 · INVERT</p>
+        <button class="lab-inv magnetic" id="labInvert" type="button" aria-pressed="false">Flip the lights</button>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════ 7 · METHOD — numbered cues ══════════ -->
-<section class="s-method" id="method">
+<!-- ══════════ 10 · REEL — scroll-driven film (from TY1) ══════════ -->
+<section class="s-reel" id="reel">
+  <div class="reel-pin">
+    <div class="reel-blob" id="reelBlob" aria-hidden="true"></div>
+    <p class="micro reel-micro"><span class="p">&gt;</span>THE&nbsp;BUILD,&nbsp;AS&nbsp;A&nbsp;FILM</p>
+    <div class="reel-scenes">
+      <div class="rscene is-on" data-scene="0"><span class="rscene-no">SCENE 01</span><h3>Idea</h3><p>Every build starts with listening — the real objective, not the proposed solution.</p></div>
+      <div class="rscene" data-scene="1"><span class="rscene-no">SCENE 02</span><h3>Design</h3><p>References first. A sample you can see — before a single line of code.</p></div>
+      <div class="rscene" data-scene="2"><span class="rscene-no">SCENE 03</span><h3>Code</h3><p>The smallest decisive change. Verified at every step, never assumed.</p></div>
+      <div class="rscene" data-scene="3"><span class="rscene-no">SCENE 04</span><h3>Ship</h3><p>Tested on phone and desktop. Live — or it isn't done.</p></div>
+    </div>
+    <div class="reel-progress"><span id="reelBar"></span></div>
+  </div>
+</section>
+
+<!-- ══════════ 11 · FIELD — generative particles (from Janis Wanger) ══════════ -->
+<section class="s-field" id="field">
+  <canvas class="field-canvas" id="fieldCanvas" aria-hidden="true"></canvas>
+  <div class="wrap field-inner">
+    <p class="micro micro-dark" data-reveal><span class="p">&gt;</span>THE&nbsp;FIELD</p>
+    <h2 class="h-lg field-title" data-reveal>It responds<br>to you.</h2>
+    <p class="field-sub" data-reveal>Move your cursor through the dust.</p>
+    <button class="field-shuffle magnetic" id="fieldShuffle" type="button">Shuffle the field &#8646;</button>
+  </div>
+</section>
+
+<!-- ══════════ 12 · MATERIAL — live wave simulation (from Davaris) ══════════ -->
+<section class="s-material" id="material">
+  <canvas class="material-canvas" id="materialCanvas" aria-hidden="true"></canvas>
+  <div class="wrap material-inner">
+    <p class="micro" data-reveal><span class="p">&gt;</span>THE&nbsp;MATERIAL</p>
+    <h2 class="h-lg material-title" data-reveal>Motion is<br>the material.</h2>
+    <p class="material-sub" data-reveal>Interfaces with texture, rhythm, and weight — rendered live, never a static picture.</p>
+  </div>
+</section>
+
+<!-- ══════════ 13 · ONAIR — live show clock (from LAYERS OF TIME) ══════════ -->
+<section class="s-onair" id="onair">
   <div class="wrap">
-    <p class="micro" data-reveal><span class="p">&gt;</span>THE&nbsp;METHOD</p>
-    <ol class="cues">
-      <li data-reveal><span class="cue-no">CUE&nbsp;01</span><h3>Listen</h3><p>The real objective first — never the proposed solution.</p></li>
-      <li data-reveal><span class="cue-no">CUE&nbsp;02</span><h3>Reference</h3><p>Study what great looks like. Sample before a single line of code.</p></li>
-      <li data-reveal><span class="cue-no">CUE&nbsp;03</span><h3>Build</h3><p>The smallest decisive change. Verify the result — never assume it.</p></li>
-      <li data-reveal><span class="cue-no">CUE&nbsp;04</span><h3>Ship</h3><p>Tested on phone and desktop. Live — or it isn't done.</p></li>
-    </ol>
+    <p class="micro" data-reveal><span class="p">&gt;</span>LIVE&nbsp;FROM&nbsp;HYDERABAD</p>
+    <div class="onair-clock" data-reveal><span class="onair-dot" aria-hidden="true"></span><span id="smpte">00:00:00:00</span></div>
+    <div class="onair-rows" data-reveal>
+      <div class="orow"><span class="orow-k">NOW</span><span class="orow-v">Available for new projects</span></div>
+      <div class="orow"><span class="orow-k">NEXT</span><span class="orow-v">Your build — shipped live</span></div>
+      <div class="orow"><span class="orow-k">SIGNAL</span><span class="orow-v">Hyderabad · IST · <b id="onairIst">--:--</b></span></div>
+    </div>
+    <a class="btn-line magnetic onair-cta" data-reveal href="https://wa.me/919398359538?text=Hi%20Dinesh%20%E2%80%94%20let's%20talk%20about%20my%20project." target="_blank" rel="noopener">Book the next slot &#8599;</a>
   </div>
 </section>
 
-<!-- ══════════ 8 · SIGNAL — live availability ══════════ -->
-<section class="s-signal" id="signal">
-  <div class="wrap signal-row" data-reveal>
-    <span class="pulse" aria-hidden="true"></span>
-    <p class="signal-text">Open for work &nbsp;&middot;&nbsp; <b id="istClock">--:--:--</b> IST &nbsp;&middot;&nbsp; Hyderabad</p>
-    <a class="btn-line magnetic" href="https://wa.me/919398359538?text=Hi%20Dinesh%20%E2%80%94%20I%20want%20to%20build%20something." target="_blank" rel="noopener">Start a project &#8599;</a>
-  </div>
-</section>
-
-<!-- ══════════ 9 · PROOF — count-up stats ══════════ -->
-<section class="s-proof" id="proof">
+<!-- ══════════ 14 · INDEX — ink + horizontal gallery (from NEUV) ══════════ -->
+<section class="s-index" id="index">
+  <svg class="goo-defs" aria-hidden="true" width="0" height="0"><defs><filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="18" result="b"/><feColorMatrix in="b" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -11" result="g"/><feComposite in="SourceGraphic" in2="g" operator="atop"/></filter></defs></svg>
+  <div class="ink-stage" aria-hidden="true"><div class="ink-blob b1"></div><div class="ink-blob b2"></div><div class="ink-blob b3"></div></div>
   <div class="wrap">
-    <p class="micro" data-reveal><span class="p">&gt;</span>PROOF</p>
-    <div class="stats">
-      <div class="stat" data-reveal><span class="num" data-count="6">0</span><span class="lbl">selected builds</span></div>
-      <div class="stat" data-reveal><span class="num" data-count="11">0</span><span class="lbl">technologies in the kit</span></div>
-      <div class="stat" data-reveal><span class="num" data-count="3">0</span><span class="lbl">certifications</span></div>
-      <div class="stat" data-reveal><span class="num" data-count="1">0</span><span class="lbl">obsession — quality</span></div>
+    <p class="micro" data-reveal><span class="p">&gt;</span>THE&nbsp;INDEX</p>
+    <div class="index-head" data-reveal>
+      <h2 class="h-lg">Six builds,<br>one shelf.</h2>
+      <div class="work-nav">
+        <button class="wbtn magnetic" id="idxPrev" type="button" aria-label="Previous project">&#8592;</button>
+        <button class="wbtn magnetic" id="idxNext" type="button" aria-label="Next project">&#8594;</button>
+      </div>
     </div>
+  </div>
+  <div class="index-film" id="indexFilm" tabindex="0" aria-label="Project index. Use arrow keys to browse.">
+    <article class="icard" data-reveal><span class="icard-no">01</span><h3>IMPERIUM</h3><p>Multi-agent AI system — job discovery, ATS resumes, autonomous workflows.</p></article>
+    <article class="icard" data-reveal><span class="icard-no">02</span><h3>KeyMind</h3><p>An AI product — from prompt design to an interface people use.</p></article>
+    <article class="icard" data-reveal><span class="icard-no">03</span><h3>Auction Space</h3><p>Live auction flow — real-time bidding, sharp UI, zero clutter.</p></article>
+    <article class="icard" data-reveal><span class="icard-no">04</span><h3>Super</h3><p>A high-energy web build — motion-led and unmistakably mine.</p></article>
+    <article class="icard" data-reveal><span class="icard-no">05</span><h3>Sreeka Interiors</h3><p>Hyderabad interior studio — calm, premium, built to convert.</p><a class="icard-link magnetic" href="https://sreeka-interiors.vercel.app" target="_blank" rel="noopener">Visit live &#8599;</a></article>
+    <article class="icard" data-reveal><span class="icard-no">06</span><h3>Photography</h3><p>The eye behind the code — frames, light, moments kept.</p></article>
+  </div>
+  <div class="wrap"><p class="micro film-hint"><span class="p">&gt;</span>DRAG&nbsp;&middot;&nbsp;SCROLL&nbsp;&middot;&nbsp;&#8592;&nbsp;&#8594;</p></div>
+  <div class="wrap endbar">
+    <span>&copy; 2026 Dinesh Kumar</span>
+    <span>BUILT WITH OBSESSION, NOT TEMPLATES</span>
+    <a href="#top" class="to-top magnetic">Back to top &#8593;</a>
   </div>
 </section>
-
-<!-- ══════════ 10 · TRANSMIT — conversational contact ══════════ -->
-<section class="s-transmit" id="contact">
-  <div class="wrap">
-    <p class="micro" data-reveal><span class="p">&gt;</span>TRANSMIT</p>
-    <h2 class="h-xl" data-reveal>What do you<br>want to build?</h2>
-    <div class="chips" data-reveal>
-      <button class="chip magnetic" type="button" data-wa="Hi Dinesh — I want a website built.">A website</button>
-      <button class="chip magnetic" type="button" data-wa="Hi Dinesh — I want an AI agent built.">An AI agent</button>
-      <button class="chip magnetic" type="button" data-wa="Hi Dinesh — I have something else in mind.">Something else</button>
-    </div>
-    <div class="direct" data-reveal>
-      <a class="magnetic" href="https://wa.me/919398359538" target="_blank" rel="noopener">WhatsApp &#8599;</a>
-      <a class="magnetic" href="tel:+919398359538">+91 93983 59538</a>
-      <a class="magnetic" href="https://instagram.com/dinesh.kumar_i" target="_blank" rel="noopener">Instagram &#8599;</a>
-      <a class="magnetic" href="https://github.com/dineshmerugu06" target="_blank" rel="noopener">GitHub &#8599;</a>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ 11 · FINALE ══════════ -->
-<footer class="s-finale">
-  <div class="wrap">
-    <p class="giant-foot" aria-hidden="true">DINESH&nbsp;KUMAR</p>
-    <div class="foot-row">
-      <span>&copy; 2026 Dinesh Kumar</span>
-      <span>HYDERABAD &middot; <b id="footClock">--:--</b> IST</span>
-      <a href="#top" class="to-top magnetic">Back to top &#8593;</a>
-    </div>
-  </div>
-</footer>
 
 <script src="./assets/js/vendor/gsap.min.js"></script>
 <script src="./assets/js/vendor/ScrollTrigger.min.js"></script>
